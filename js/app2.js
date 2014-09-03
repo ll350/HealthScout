@@ -218,12 +218,82 @@ process_q = {
   ] //procedures the main part of process_q
 }
 
+process_r = {
+  procedures : [
+    {id: 1, description: "Deliver a Baby",
+      questions: [
+        { prompt: "Will you be having a c-section?", responses: ["Yes", "No"] },
+        { prompt: "Do you have any of the following conditions: Alzheimer's Disease, BMI less than 19 or over 40, Chronic Congestive Heart Failure, Colitis, Crohn's Disease, Diverticulitis, Kidney Disease, Severe Depression)?", responses: ["Yes", "No"] }
+      ]
+    },
+    {id: 2, description: "Laparoscopic cholecystectomy",
+      questions: [
+        { prompt: "Do you expect to stay overnight in the hospital?", responses: ["Yes", "No"] },
+        { prompt: "Do you have any of the following conditions: Alzheimer's Disease, BMI less than 19 or over 40, Chronic Congestive Heart Failure, Colitis, Crohn's Disease, Diverticulitis, Kidney Disease, Severe Depression)?", responses: ["Yes", "No"] }
+      ]
+    },
+    {id: 3, description: "MRI",
+      questions: [
+        { prompt: "Are you having an MRI of your brain?", responses: ["Yes", "No"] },
+        { prompt: "Are you having an MRI of your lower back (lumbar)?", responses: ["Yes", "No"] },
+        { prompt: "Are you having an MRI of your legs?", responses: ["Yes", "No"] },
+        { prompt: "Are you having an MRI of your neck?", responses: ["Yes", "No"] }
+
+      ]
+    },
+    {id: 4, description: "Spinal Fusion",
+      questions: [
+        { prompt: "Is your procedure on your neck (cervical), mid-back (thoracic), or lower back (lumbar)?", responses: ["Yes", "No"] },
+        { prompt: "Do you have scoliosis or do you plan on having 9+ vertebra fused?", responses: ["Yes", "No"] },
+        { prompt: "Do you have any of the following conditions: Alzheimer's Disease, BMI less than 19 or over 40, Chronic Congestive Heart Failure, Colitis, Crohn's Disease, Diverticulitis, Kidney Disease, Severe Depression)?", responses: ["Yes", "No"] },
+        { prompt: "Are you having fusion surgery done from both the front approach (anterior) and back approach (posterior)?", responses: ["Yes", "No"] }
+
+      ]
+    },
+    {id: 5, description: "Cardiac Angioplasty or Stent",
+      questions: [
+        { prompt: "Are you getting a stent placed?", responses: ["Yes", "No"] },
+        { prompt: "If so, will it be a ", responses: ["Yes", "No"] },
+        { prompt: "Do you have any of the following conditions: Alzheimer's Disease, BMI less than 19 or over 40, Chronic Congestive Heart Failure, Colitis, Crohn's Disease, Diverticulitis, Kidney Disease, Severe Depression)?", responses: ["Yes", "No"] },
+        { prompt: "Do you expect to stay overnight in the hospital?", responses: ["Yes", "No"] }
+
+      ]
+    },
+    {id: 6, description: "Colonoscopy",
+      questions: []
+    }
+  ] //procedures the main part of process_q
+}
+
+
+$scope.process_list = _.map( _.get(process_r), function(procedure) { 
+  		return procedure.description; }
+	);
 $scope.process_q = process_q;
 
 //$scope.proc_questions = proc_questions;
 
 $scope.testfunction1 = function() {
-  console.log("Test Function 1 functioning")
+  console.log("Test Function 1 functioning");
+  //console.log(_.chain(_.get(process_r)).first().value()  );
+  console.log(_.map( _.get(process_r), function(procedure) { 
+  		return procedure.id; }
+	)
+);
+  console.log("Test Function 1: procedures");
+  //console.log(_.chain(_.get(process_r)).first().value()  );
+  console.log(_.map( _.get(process_r), function(procedure) { 
+  		return procedure.description; }
+	)
+);
+
+  console.log("Test Function 1: procedure questions");
+  //console.log(_.chain(_.get(process_r)).first().value()  );
+  console.log(_.map( _.get(process_r), function(procedure) { 
+  		return procedure.questions; }
+	)
+);
+
 };
 
 $scope.testfunction2 = function() {

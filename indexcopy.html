@@ -29,6 +29,7 @@
     <![endif]-->
 <script src="js/angular.js"></script>
 <script src="js/underscore.js"></script>
+<script src="js/underscore.db.js"></script>
 <script src="js/app2.js"></script>
 </head>
 
@@ -114,8 +115,14 @@
 
     <!-- Page Content -->
 
-    <div class="content-section-a">
-
+    <div class="content-section-a"  ng-controller="UnderCtrl">
+		
+		<h1>Test showing the procedues</h1>
+		<ul>
+			<li ng-repeat="proc in process_list">
+				{{proc}}
+			</li>
+		</ul>
         <div class="container">
 
             <div class="row">
