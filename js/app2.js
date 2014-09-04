@@ -283,8 +283,12 @@ $scope.onSelect = function($item, $model, $label) {
     var matched_questions =  _(_.get(process_r)).chain().where({description: $model}).pluck("questions").flatten().value();
 	
 	_.each(matched_questions, function(individual_q) {
-		console.log(individual_q);
-		
+		//console.log(individual_q);
+		console.log(individual_q.prompt);
+		//console.log(_.object(individual_q.responses) );
+		_.each(individual_q.responses, function(item) {
+			console.log(item);
+		} );
 	} );
 
 	//ModalDemoCtrl.open('lg');
