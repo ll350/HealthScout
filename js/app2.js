@@ -292,6 +292,7 @@ $scope.onSelect = function($item, $model, $label) {
 	} );
 
 	//ModalDemoCtrl.open('lg');
+	$scope.matched_questions = matched_questions;
 }
 
 
@@ -371,6 +372,11 @@ for(var i=0; i<flatJect2.length; i++) {
   $scope.items = _.map( _.get(process_r), function(procedure) { 
   		return procedure.description; }
 	);
+	
+	$scope.$watch('matched_questions', function() { 
+		$scope.items = $scope.matched_questions;
+		//console.log($scope.matched_questions);
+	}); 
 
   $scope.open = function (size) {
 
@@ -380,7 +386,7 @@ for(var i=0; i<flatJect2.length; i++) {
       size: size,
       resolve: {
         items: function () {
-          return $scope.items;
+          return $scope.items2 || $scope.items;
         }
       }
     });

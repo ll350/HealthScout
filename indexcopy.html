@@ -120,9 +120,18 @@
 						            <h3 class="modal-title">I'm a modal!</h3>
 						        </div>
 						        <div class="modal-body">
+									<h4>Please answer the following questions</h4>
+									<div ng-repeat="item in items">
+									    <pre>{{item.prompt}}</pre>
+									    <div class="btn-group">
+									        <label ng-repeat="answer in item.responses" class="btn btn-primary" ng-model="checkModel.left" btn-checkbox>{{item.responses[answer]}}</label>
+									        <label ng-repeat="answer in item.responses"class="btn btn-primary" ng-model="checkModel.middle" btn-checkbox>{{_.each(item.responses)}}</label>
+									        <label ng-repeat="(k,v) in item.responses"class="btn btn-primary" ng-model="checkModel.right" btn-checkbox>{{v}}</label>
+									    </div>
+									</div> <!-- ng-repeat="items in items" -->
 						            <ul>
 						                <li ng-repeat="item in items">
-						                    <a ng-click="selected.item = item">{{ item }}</a>
+						                    <a ng-click="selected.item = item">{{ item.prompt }}</a>
 						                </li>
 						            </ul>
 						            Selected: <b>{{ selected.item }}</b>
