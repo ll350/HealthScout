@@ -2,7 +2,7 @@ var app2 = angular.module('underscore', ['ui.bootstrap']);
 
 
 
- app2.controller('UnderCtrl', function($scope) {
+ app2.controller('UnderCtrl', function($scope, $modal, $log) {
 
 	 //test typeahead
 	 
@@ -278,7 +278,16 @@ $scope.process_list = _.map( _.get(process_r), function(procedure) {
 $scope.process_q = process_q;
 
 $scope.onSelect = function($item, $model, $label) {
-	console.log("You selected " );
+	console.log("You selected " + $model );
+	
+    var matched_questions =  _(_.get(process_r)).chain().where({description: $model}).pluck("questions").flatten().value();
+	
+	_.each(matched_questions, function(individual_q) {
+		console.log(individual_q);
+		
+	} );
+
+	//ModalDemoCtrl.open('lg');
 }
 
 
@@ -352,4 +361,98 @@ for(var i=0; i<flatJect2.length; i++) {
 }
 };
 
+
+
+  //$scope.items = ['item1', 'item2', 'item3'];
+  $scope.items = _.map( _.get(process_r), function(procedure) { 
+  		return procedure.description; }
+	);
+
+  $scope.open = function (size) {
+
+    var modalInstance = $modal.open({
+      templateUrl: 'myModalContent.html',
+      controller: ModalInstanceCtrl,
+      size: size,
+      resolve: {
+        items: function () {
+          return $scope.items;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      $scope.selected = selectedItem;
+    }, function () {
+      $log.info('Modal talked to the hand at : ' + new Date());
+    });
+  };
+
+
+// Please note that $modalInstance represents a modal window (instance) dependency.
+// It is not the same as the $modal service used above.
+
+var ModalInstanceCtrl = function ($scope, $modalInstance, items) {
+
+  $scope.items = items;
+  $scope.selected = {
+    item: $scope.items[0]
+  };
+
+  $scope.ok = function () {
+    $modalInstance.close($scope.selected.item);
+  };
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+};
+
+
+
 });
+
+//SeperateModal ish
+var ModalDemoCtrl = function ($scope, $modal, $log) {
+
+  $scope.items = ['item1', 'item2', 'item3'];
+
+  $scope.open = function (size) {
+
+    var modalInstance = $modal.open({
+      templateUrl: 'myModalContent.html',
+      controller: ModalInstanceCtrl,
+      size: size,
+      resolve: {
+        items: function () {
+          return $scope.items;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      $scope.selected = selectedItem;
+    }, function () {
+      $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
+};
+
+// Please note that $modalInstance represents a modal window (instance) dependency.
+// It is not the same as the $modal service used above.
+
+var ModalInstanceCtrl = function ($scope, $modalInstance, items) {
+
+  $scope.items = items;
+  $scope.selected = {
+    item: $scope.items[0]
+  };
+
+  $scope.ok = function () {
+    $modalInstance.close($scope.selected.item);
+  };
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+};
