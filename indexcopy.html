@@ -28,6 +28,8 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 <script src="js/angular.js"></script>
+<script src="js/angular-strap.js"></script>
+<script src="js/ui-bootstrap-tpls-0.11.0.js"></script>
 <script src="js/underscore.js"></script>
 <script src="js/underscore.db.js"></script>
 <script src="js/app2.js"></script>
@@ -103,7 +105,17 @@
                                 <a href="#" class="btn btn-default btn-lg" ng-click="testfunction3()"><i class="fa fa-heart fa-fw"></i> <span class="network-name">TEST Three</span></a>
                             </li>
                         </ul>
+						
+						<br/>
+						<form class="form-inline" role="form">
+						  <div class="form-group">
+						    <input type="text" class="form-control" ng-model="selected_procedure" typeahead="procedure for procedure in process_list | filter:$viewValue | limitTo:8" placeholder="Procedure to price" class="form-control" typeahead-on-select="onSelect($item, $model, $label)">
+						  </div>
+						</form>
                     </div>
+					
+					
+					
                 </div>
             </div>
 

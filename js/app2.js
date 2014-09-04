@@ -1,8 +1,14 @@
-var app2 = angular.module('underscore', []);
+var app2 = angular.module('underscore', ['ui.bootstrap']);
 
 
 
  app2.controller('UnderCtrl', function($scope) {
+
+	 //test typeahead
+	 
+	 $scope.selectedState = "";
+	 $scope.states = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
+	 
 
 conditions = [{"Conditions:":"Alzheimer's Disease"},
 {"Conditions:":"BMI less than 19 or over 40"},
@@ -265,11 +271,16 @@ process_r = {
   ] //procedures the main part of process_q
 }
 
-
+$scope.selected_procedure = "";
 $scope.process_list = _.map( _.get(process_r), function(procedure) { 
   		return procedure.description; }
 	);
 $scope.process_q = process_q;
+
+$scope.onSelect = function($item, $model, $label) {
+	console.log("You selected " );
+}
+
 
 //$scope.proc_questions = proc_questions;
 
