@@ -111,29 +111,26 @@
 						  <div class="form-group">
 						    <input type="text" class="form-control" ng-model="selected_procedure" typeahead="procedure for procedure in process_list | filter:$viewValue | limitTo:8" placeholder="Procedure to price" class="form-control" typeahead-on-select="onSelect($item, $model, $label)">
 						  </div>
+						  <button class="btn btn-default" ng-click="open()">GO!</button>
 						</form>
 						
 						
 						<div >
 						    <script type="text/ng-template" id="myModalContent.html">
 						        <div class="modal-header">
-						            <h3 class="modal-title">I'm a modal!</h3>
+						            <h3 class="modal-title">Please answer the following questions</h3>
 						        </div>
 						        <div class="modal-body">
-									<h4>Please answer the following questions</h4>
-									<div ng-repeat="item in items">
-									    <pre>{{item.prompt}}</pre>
-									    <div class="btn-group">
-									        <label ng-repeat="answer in item.responses" class="btn btn-primary" ng-model="checkModel.left" btn-checkbox>{{item.responses[answer]}}</label>
-									        <label ng-repeat="answer in item.responses"class="btn btn-primary" ng-model="checkModel.middle" btn-checkbox>{{_.each(item.responses)}}</label>
-									        <label ng-repeat="(k,v) in item.responses"class="btn btn-primary" ng-model="checkModel.right" btn-checkbox>{{v}}</label>
+									
+									<div class="panel panel-default" ng-repeat="item in items">
+									    <div class="panel-heading">{{item.prompt}}</div>
+									    <div class="panel-body">
+										<div class="btn-group">
+									       <label ng-repeat="(k,v) in item.responses"class="btn btn-primary" ng-click="answersClicked.push( {question: item.prompt, answer: k})" >{{v}}</label>
 									    </div>
+										</div>
 									</div> <!-- ng-repeat="items in items" -->
-						            <ul>
-						                <li ng-repeat="item in items">
-						                    <a ng-click="selected.item = item">{{ item.prompt }}</a>
-						                </li>
-						            </ul>
+						           
 						            Selected: <b>{{ selected.item }}</b>
 						        </div>
 						        <div class="modal-footer">
@@ -142,10 +139,11 @@
 						        </div>
 						    </script>
 
-						    <button class="btn btn-default" ng-click="open()">Open me!</button>
-						    <button class="btn btn-default" ng-click="open('lg')">Large modal</button>
-						    <button class="btn btn-default" ng-click="open('sm')">Small modal</button>
 						    <div ng-show="selected">Selection from a modal: {{ selected }}</div>
+							<div ng-repeat="ans in answersClicked">Question from a modal: {{ ans.question }}<br/>
+							Answers from a modal: {{ ans.answer }}</div>
+							
+							
 						</div>
 						<!-- .ModalDemoCtrl -->
                     </div>

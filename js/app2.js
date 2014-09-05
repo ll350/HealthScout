@@ -291,8 +291,11 @@ $scope.onSelect = function($item, $model, $label) {
 		} );
 	} );
 
-	//ModalDemoCtrl.open('lg');
+	
 	$scope.matched_questions = matched_questions;
+	//ModalDemoCtrl.open('lg');
+	//open('marketplace.html');
+	//$scope.open('lg');
 }
 
 
@@ -318,6 +321,8 @@ $scope.testfunction1 = function() {
   		return procedure.questions; }
 	)
 );
+
+console.log()
 
 };
 
@@ -366,7 +371,12 @@ for(var i=0; i<flatJect2.length; i++) {
 }
 };
 
-
+//DOES NOT WORK
+$scope.answersClicked = [];
+$scope.sendAnswer = function(clickedAnswer) {
+	$scope.answers.push(clickedAnswer);
+	console.log($scope.answers);
+}
 
   //$scope.items = ['item1', 'item2', 'item3'];
   $scope.items = _.map( _.get(process_r), function(procedure) { 
@@ -378,43 +388,58 @@ for(var i=0; i<flatJect2.length; i++) {
 		//console.log($scope.matched_questions);
 	}); 
 
-  $scope.open = function (size) {
+  $scope.open = function (answersClicked) {
 
     var modalInstance = $modal.open({
       templateUrl: 'myModalContent.html',
       controller: ModalInstanceCtrl,
-      size: size,
+      size: 'lg',
       resolve: {
         items: function () {
-          return $scope.items2 || $scope.items;
-        }
+          return  $scope.items;
+        },
+		answersClicked: function() {
+			return $scope.answersClicked;
+		}
       }
     });
 
-    modalInstance.result.then(function (selectedItem) {
+    modalInstance.result.then(function (selectedItem, answers) {
       $scope.selected = selectedItem;
+	  //$scope.answersClicked = result;
+	  console.log($scope.answersClicked);
+	  console.log(answers);
     }, function () {
       $log.info('Modal talked to the hand at : ' + new Date());
     });
   };
 
-
+  $scope.storeValue = function(ans) {
+  	$scope.answersClicked = ans;
+  }
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
 
-var ModalInstanceCtrl = function ($scope, $modalInstance, items) {
+var ModalInstanceCtrl = function ($scope, $modalInstance, items, answersClicked) {
 
   $scope.items = items;
   $scope.selected = {
     item: $scope.items[0]
   };
 
+  $scope.answersClicked = answersClicked;
+
   $scope.ok = function () {
-    $modalInstance.close($scope.selected.item);
+    $modalInstance.close($scope.selected.item, $scope.answersClicked);
+	//TESTING
+	
+	console.log($scope.answersClicked);
   };
 
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
+	//DOES NOT HAVE main controller scope
+	console.log($scope.matched_questions);
   };
 };
 
