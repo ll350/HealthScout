@@ -226,7 +226,7 @@ process_q = {
 
 process_r = {
   procedures : [
-    {id: 1, description: "Delivering a Baby",
+    {id: 1, description: "Deliver a Baby",
       questions: [
         { prompt: "Will you be having a c-section?", responses: ["Yes", "No"] },
         { prompt: "Do you have any of the following conditions: Alzheimer's Disease, BMI less than 19 or over 40, Chronic Congestive Heart Failure, Colitis, Crohn's Disease, Diverticulitis, Kidney Disease, Severe Depression)?", responses: ["Yes", "No"] }
@@ -316,8 +316,21 @@ var ans_cost_r = {
 $scope.initialSelection = "";
 
 var getProcedureID = function (descriptionString, answersArray) {
-	return _(_.get(ans_cost_r)).chain().where({PrimaryDesc:descriptionString}).pluck("ID").value();
+	return _(_.get(ans_cost_r)).chain().where({PrimaryDesc:descriptionFix(descriptionString), Answer1: answersArray[0].answer, Answer2: answersArray[0].answer, Answer3: answersArray[0].answer, Answer4: answersArray[0].answer}).pluck("ID").value();
 };
+
+
+var descriptionFix = function(typeAheadDescription) {
+	descriptionMap = {
+		"Deliver a Baby":"Delivering a Baby",
+		"Laparoscopic cholecystectomy":"Laparoscopic cholecystectomy",
+		"MRI":"MRI",
+		"Spinal Fusion":"Spinal Fusion",
+		"Cardiac Angioplasty or Stent":"Cardiac Angioplasty",
+		"Colonoscopy":"Colonoscopy"
+	}
+	return descriptionMap[typeAheadDescription];
+}
 
 $scope.selected_procedure = "";
 $scope.process_list = _.map( _.get(process_r), function(procedure) { 
