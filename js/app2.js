@@ -226,7 +226,7 @@ process_q = {
 
 process_r = {
   procedures : [
-    {id: 1, description: "Deliver a Baby",
+    {id: 1, description: "Delivering a Baby",
       questions: [
         { prompt: "Will you be having a c-section?", responses: ["Yes", "No"] },
         { prompt: "Do you have any of the following conditions: Alzheimer's Disease, BMI less than 19 or over 40, Chronic Congestive Heart Failure, Colitis, Crohn's Disease, Diverticulitis, Kidney Disease, Severe Depression)?", responses: ["Yes", "No"] }
@@ -268,8 +268,56 @@ process_r = {
     {id: 6, description: "Colonoscopy",
       questions: []
     }
-  ] //procedures the main part of process_q
+  ] //procedures the main part of process_r
 }
+
+var ans_cost_r = {
+	procedures: [{ID:59400767,PrimaryDesc:"Delivering a Baby",DrgDesc:"VAGINAL DELIVERY W STERILIZATION &/OR D&C",IN_OUT:"Inpatient",Answer1:null,Answer2:null,Answer3:null,Answer4:null,Answer5:null,MedicareBaseRate:5312.461956,MedicareBaseRate:2050.03,MedicareBaseRate:null,Rex:25017.8143,WakeMed:28972.3399,drFeelgood:1025.015,Rex:5549.043447,WakeMed:6426.171804,drSchmidt:2050.03},
+{ID:59400768,PrimaryDesc:"Delivering a Baby",DrgDesc:"VAGINAL DELIVERY W O.R. PROC EXCEPT STERIL &/OR D&C",IN_OUT:"Inpatient",Answer1:null,Answer2:null,Answer3:null,Answer4:null,Answer5:null,MedicareBaseRate:10498.99804,MedicareBaseRate:2050.03,MedicareBaseRate:null,Rex:49442.60974,WakeMed:57257.9234,drFeelgood:1025.015,Rex:10966.55312,WakeMed:12700.0185,drSchmidt:2050.03},
+{ID:59400774,PrimaryDesc:"Delivering a Baby",DrgDesc:"VAGINAL DELIVERY W COMPLICATING DIAGNOSES",IN_OUT:"Inpatient",Answer1:1,Answer2:0,Answer3:1,Answer4:0,Answer5:2,MedicareBaseRate:4145.77884,MedicareBaseRate:2050.03,MedicareBaseRate:null,Rex:19523.58926,WakeMed:22609.65155,drFeelgood:1025.015,Rex:4330.404075,WakeMed:5014.90407,drSchmidt:2050.03},
+{ID:59400775,PrimaryDesc:"Delivering a Baby",DrgDesc:"VAGINAL DELIVERY W/O COMPLICATING DIAGNOSES",IN_OUT:"Inpatient",Answer1:1,Answer2:1,Answer3:1,Answer4:1,Answer5:4,MedicareBaseRate:3301.672968,MedicareBaseRate:2050.03,MedicareBaseRate:null,Rex:15548.46734,WakeMed:18006.18852,drFeelgood:1025.015,Rex:3448.707379,WakeMed:3993.838997,drSchmidt:2050.03},
+{ID:59510765,PrimaryDesc:"Delivering a Baby",DrgDesc:"CESAREAN SECTION W CC/MCC",IN_OUT:"Inpatient",Answer1:0,Answer2:1,Answer3:0,Answer4:1,Answer5:2,MedicareBaseRate:6914.998104,MedicareBaseRate:2265.49,MedicareBaseRate:null,Rex:32564.58868,WakeMed:37712.02075,drFeelgood:1132.745,Rex:7222.945827,WakeMed:8364.665236,drSchmidt:2265.49},
+{ID:59510766,PrimaryDesc:"Delivering a Baby",DrgDesc:"CESAREAN SECTION W/O CC/MCC",IN_OUT:"Inpatient",Answer1:0,Answer2:0,Answer3:0,Answer4:0,Answer5:0,MedicareBaseRate:4932.959316,MedicareBaseRate:2265.49,MedicareBaseRate:null,Rex:23230.63415,WakeMed:26902.66306,drFeelgood:1132.745,Rex:5152.6403,WakeMed:5967.10985,drSchmidt:2265.49},
+{ID:47562417,PrimaryDesc:"Laparoscopic cholecystectomy",DrgDesc:"LAPAROSCOPIC CHOLECYSTECTOMY W/O C.D.E. W MCC",IN_OUT:"Inpatient",Answer1:1,Answer2:0,Answer3:1,Answer4:0,Answer5:2,MedicareBaseRate:14514.25097,MedicareBaseRate:633.73,MedicareBaseRate:null,Rex:68351.51734,WakeMed:79155.73155,drFeelgood:316.865,Rex:15160.61854,WakeMed:17557.03309,drSchmidt:633.73},
+{ID:47562418,PrimaryDesc:"Laparoscopic cholecystectomy",DrgDesc:"LAPAROSCOPIC CHOLECYSTECTOMY W/O C.D.E. W CC",IN_OUT:"Inpatient",Answer1:1,Answer2:1,Answer3:1,Answer4:1,Answer5:4,MedicareBaseRate:9806.118216,MedicareBaseRate:633.73,MedicareBaseRate:null,Rex:37369.02857,WakeMed:52263.183,drFeelgood:316.865,Rex:9337.4,WakeMed:11592.16667,drSchmidt:633.73},
+{ID:47562419,PrimaryDesc:"Laparoscopic cholecystectomy",DrgDesc:"LAPAROSCOPIC CHOLECYSTECTOMY W/O C.D.E. W/O CC/MCC",IN_OUT:"Inpatient",Answer1:0,Answer2:1,Answer3:0,Answer4:1,Answer5:2,MedicareBaseRate:6927.073188,MedicareBaseRate:633.73,MedicareBaseRate:null,Rex:32621.4535,WakeMed:37777.8741,drFeelgood:316.865,Rex:7235.558654,WakeMed:8379.271752,drSchmidt:633.73},
+{ID:22612453,PrimaryDesc:"Spinal Fusion",DrgDesc:"COMBINED ANTERIOR/POSTERIOR SPINAL FUSION W MCC",IN_OUT:"Inpatient",Answer1:0,Answer2:0,Answer3:0,Answer4:0,Answer5:0,MedicareBaseRate:60535.84612,MedicareBaseRate:1537.99,MedicareBaseRate:null,Rex:285079.6052,WakeMed:330141.679,drFeelgood:768.995,Rex:63231.70744,WakeMed:73226.64156,drSchmidt:1537.99},
+{ID:22612454,PrimaryDesc:"Spinal Fusion",DrgDesc:"COMBINED ANTERIOR/POSTERIOR SPINAL FUSION W CC",IN_OUT:"Inpatient",Answer1:1,Answer2:0,Answer3:1,Answer4:0,Answer5:2,MedicareBaseRate:44659.41067,MedicareBaseRate:1537.99,MedicareBaseRate:null,Rex:210313.1942,WakeMed:243557.062,drFeelgood:768.995,Rex:46648.24185,WakeMed:54021.85428,drSchmidt:1537.99},
+{ID:22612455,PrimaryDesc:"Spinal Fusion",DrgDesc:"COMBINED ANTERIOR/POSTERIOR SPINAL FUSION W/O CC/MCC",IN_OUT:"Inpatient",Answer1:1,Answer2:1,Answer3:1,Answer4:1,Answer5:4,MedicareBaseRate:33924.661,MedicareBaseRate:1537.99,MedicareBaseRate:null,Rex:159760.3665,WakeMed:185013.4302,drFeelgood:768.995,Rex:35435.43829,WakeMed:41036.66092,drSchmidt:1537.99},
+{ID:22612456,PrimaryDesc:"Spinal Fusion",DrgDesc:"SPINAL FUS EXC CERV W SPINAL CURV/MALIG/INFEC OR 9+ FUS W MCC",IN_OUT:"Inpatient",Answer1:0,Answer2:1,Answer3:0,Answer4:1,Answer5:2,MedicareBaseRate:54817.43134,MedicareBaseRate:1537.99,MedicareBaseRate:null,Rex:258150.0497,WakeMed:298955.4121,drFeelgood:768.995,Rex:57258.63275,WakeMed:66309.41257,drSchmidt:1537.99},
+{ID:22612457,PrimaryDesc:"Spinal Fusion",DrgDesc:"SPINAL FUS EXC CERV W SPINAL CURV/MALIG/INFEC OR 9+ FUS W CC",IN_OUT:"Inpatient",Answer1:0,Answer2:0,Answer3:0,Answer4:0,Answer5:0,MedicareBaseRate:36843.9563,MedicareBaseRate:1537.99,MedicareBaseRate:null,Rex:173508.1144,WakeMed:200934.2625,drFeelgood:768.995,Rex:38484.73946,WakeMed:44567.96022,drSchmidt:1537.99},
+{ID:22612458,PrimaryDesc:"Spinal Fusion",DrgDesc:"SPINAL FUS EXC CERV W SPINAL CURV/MALIG/INFEC OR 9+ FUS W/O CC/MCC",IN_OUT:"Inpatient",Answer1:1,Answer2:0,Answer3:1,Answer4:0,Answer5:2,MedicareBaseRate:28418.42269,MedicareBaseRate:1537.99,MedicareBaseRate:null,Rex:133830.0072,WakeMed:154984.3008,drFeelgood:768.995,Rex:29683.98899,WakeMed:34376.0893,drSchmidt:1537.99},
+{ID:22612459,PrimaryDesc:"Spinal Fusion",DrgDesc:"SPINAL FUSION EXCEPT CERVICAL W MCC",IN_OUT:"Inpatient",Answer1:1,Answer2:1,Answer3:1,Answer4:1,Answer5:4,MedicareBaseRate:37539.13614,MedicareBaseRate:1537.99,MedicareBaseRate:null,Rex:176781.9035,WakeMed:204725.5342,drFeelgood:768.995,Rex:39210.87796,WakeMed:45408.87826,drSchmidt:1537.99},
+{ID:22612460,PrimaryDesc:"Spinal Fusion",DrgDesc:"SPINAL FUSION EXCEPT CERVICAL W/O MCC",IN_OUT:"Inpatient",Answer1:0,Answer2:1,Answer3:0,Answer4:1,Answer5:2,MedicareBaseRate:22331.43035,MedicareBaseRate:1537.99,MedicareBaseRate:null,Rex:91205.90361,WakeMed:121010.8877,drFeelgood:768.995,Rex:23475.59036,WakeMed:26840.66102,drSchmidt:1537.99},
+{ID:22554471,PrimaryDesc:"Spinal Fusion",DrgDesc:"CERVICAL SPINAL FUSION W MCC",IN_OUT:"Inpatient",Answer1:0,Answer2:0,Answer3:0,Answer4:0,Answer5:0,MedicareBaseRate:26920.53727,MedicareBaseRate:1217.79,MedicareBaseRate:null,Rex:126776.0613,WakeMed:146815.349,drFeelgood:608.895,Rex:28119.39778,WakeMed:32564.18568,drSchmidt:1217.79},
+{ID:22554472,PrimaryDesc:"Spinal Fusion",DrgDesc:"CERVICAL SPINAL FUSION W CC",IN_OUT:"Inpatient",Answer1:1,Answer2:0,Answer3:1,Answer4:0,Answer5:2,MedicareBaseRate:16142.6623,MedicareBaseRate:1217.79,MedicareBaseRate:null,Rex:76020.14491,WakeMed:88036.52673,drFeelgood:608.895,Rex:16861.54841,WakeMed:19526.8262,drSchmidt:1217.79},
+{ID:22554473,PrimaryDesc:"Spinal Fusion",DrgDesc:"CERVICAL SPINAL FUSION W/O CC/MCC",IN_OUT:"Inpatient",Answer1:1,Answer2:1,Answer3:1,Answer4:1,Answer5:4,MedicareBaseRate:12247.5852,MedicareBaseRate:1217.79,MedicareBaseRate:null,Rex:54583.59615,WakeMed:64327.79847,drFeelgood:608.895,Rex:13828.57692,WakeMed:14268.14286,drSchmidt:1217.79},
+{ID:92928246,PrimaryDesc:"Cardiac Angioplasty",DrgDesc:"PERC CARDIOVASC PROC W DRUG-ELUTING STENT W MCC OR 4+ VESSELS/STENTS",IN_OUT:"Inpatient",Answer1:0,Answer2:1,Answer3:0,Answer4:1,Answer5:2,MedicareBaseRate:18162.65135,MedicareBaseRate:591.06,MedicareBaseRate:null,Rex:97392,WakeMed:100517.2901,drFeelgood:295.53,Rex:21190.14286,WakeMed:22295.10553,drSchmidt:591.06},
+{ID:92928247,PrimaryDesc:"Cardiac Angioplasty",DrgDesc:"PERC CARDIOVASC PROC W DRUG-ELUTING STENT W/O MCC",IN_OUT:"Inpatient",Answer1:0,Answer2:0,Answer3:0,Answer4:1,Answer5:1,MedicareBaseRate:11420.15444,MedicareBaseRate:591.06,MedicareBaseRate:null,Rex:70670.22794,WakeMed:63525.3531,drFeelgood:295.53,Rex:12584.00735,WakeMed:14090.15752,drSchmidt:591.06},
+{ID:92928248,PrimaryDesc:"Cardiac Angioplasty",DrgDesc:"PERC CARDIOVASC PROC W NON-DRUG-ELUTING STENT W MCC OR 4+ VES/STENTS",IN_OUT:"Inpatient",Answer1:1,Answer2:0,Answer3:1,Answer4:1,Answer5:3,MedicareBaseRate:17238.04492,MedicareBaseRate:591.06,MedicareBaseRate:null,Rex:81178.59671,WakeMed:94010.3667,drFeelgood:295.53,Rex:18005.71204,WakeMed:20851.84593,drSchmidt:591.06},
+{ID:92928249,PrimaryDesc:"Cardiac Angioplasty",DrgDesc:"PERC CARDIOVASC PROC W NON-DRUG-ELUTING STENT W/O MCC",IN_OUT:"Inpatient",Answer1:1,Answer2:1,Answer3:1,Answer4:1,Answer5:4,MedicareBaseRate:10309.24672,MedicareBaseRate:591.06,MedicareBaseRate:null,Rex:54864.2963,WakeMed:56530.70124,drFeelgood:295.53,Rex:10243.37037,WakeMed:12538.71795,drSchmidt:591.06},
+{ID:93454250,PrimaryDesc:"Cardiac Angioplasty",DrgDesc:"PERC CARDIOVASC PROC W/O CORONARY ARTERY STENT W MCC",IN_OUT:"Inpatient",Answer1:0,Answer2:1,Answer3:0,Answer4:1,Answer5:2,MedicareBaseRate:17235.1699,MedicareBaseRate:844.15,MedicareBaseRate:null,Rex:81165.05747,WakeMed:93994.68733,drFeelgood:422.075,Rex:18002.70898,WakeMed:20848.36818,drSchmidt:844.15},
+{ID:93454251,PrimaryDesc:"Cardiac Angioplasty",DrgDesc:"PERC CARDIOVASC PROC W/O CORONARY ARTERY STENT W/O MCC",IN_OUT:"Inpatient",Answer1:0,Answer2:0,Answer3:1,Answer4:1,Answer5:2,MedicareBaseRate:11045.25184,MedicareBaseRate:844.15,MedicareBaseRate:null,Rex:42104.25,WakeMed:61792.13521,drFeelgood:422.075,Rex:10128.5,WakeMed:13705.7234,drSchmidt:844.15},
+{ID:92928656,PrimaryDesc:"Cardiac Angioplasty",DrgDesc:"OP Drug Eluting Stent Placement",IN_OUT:"Outpatient",Answer1:1,Answer2:0,Answer3:1,Answer4:1,Answer5:3,MedicareBaseRate:null,MedicareBaseRate:591.06,MedicareBaseRate:7727.48,Rex:64744.17235,WakeMed:89541.05393,drFeelgood:295.53,Rex:7536.233321,WakeMed:7727.288081,drSchmidt:591.06},
+{ID:92928104,PrimaryDesc:"Cardiac Angioplasty",DrgDesc:"OP Stent Placement",IN_OUT:"Outpatient",Answer1:1,Answer2:1,Answer3:1,Answer4:1,Answer5:4,MedicareBaseRate:null,MedicareBaseRate:591.06,MedicareBaseRate:6055.86,Rex:50738.61642,WakeMed:70171.39958,drFeelgood:295.53,Rex:5905.984088,WakeMed:6055.709597,drSchmidt:591.06},
+{ID:93454083,PrimaryDesc:"Cardiac Angioplasty",DrgDesc:"OP Angioplasty w/o Stent Placement",IN_OUT:"Outpatient",Answer1:0,Answer2:1,Answer3:0,Answer4:1,Answer5:2,MedicareBaseRate:null,MedicareBaseRate:844.15,MedicareBaseRate:4057.25,Rex:33993.39672,WakeMed:47012.79603,drFeelgood:422.075,Rex:3956.8375,WakeMed:4057.149235,drSchmidt:844.15},
+{ID:45378158,PrimaryDesc:"Colonoscopy",DrgDesc:"Diagnostic colonoscopy",IN_OUT:"Outpatient",Answer1:0,Answer2:0,Answer3:0,Answer4:0,Answer5:0,MedicareBaseRate:null,MedicareBaseRate:372.5,MedicareBaseRate:612.46,Rex:5131.454989,WakeMed:7096.791436,drFeelgood:186.25,Rex:597.3022848,WakeMed:612.444789,drSchmidt:372.5},
+{ID:72148336,PrimaryDesc:"MRI",DrgDesc:"Mri lumbar spine w/o dye",IN_OUT:"Outpatient",Answer1:1,Answer2:0,Answer3:1,Answer4:0,Answer5:2,MedicareBaseRate:null,MedicareBaseRate:231.62,MedicareBaseRate:339.69,Rex:2846.069858,WakeMed:3936.108616,drFeelgood:115.81,Rex:331.283044,WakeMed:339.6815635,drSchmidt:231.62},
+{ID:70551336,PrimaryDesc:"MRI",DrgDesc:"Mri brain w/o dye",IN_OUT:"Outpatient",Answer1:1,Answer2:1,Answer3:1,Answer4:1,Answer5:4,MedicareBaseRate:null,MedicareBaseRate:233.09,MedicareBaseRate:339.69,Rex:2846.069858,WakeMed:3936.108616,drFeelgood:116.545,Rex:331.283044,WakeMed:339.6815635,drSchmidt:233.09},
+{ID:73721336,PrimaryDesc:"MRI",DrgDesc:"Mri jnt of lwr extre w/o dye",IN_OUT:"Outpatient",Answer1:0,Answer2:1,Answer3:0,Answer4:1,Answer5:2,MedicareBaseRate:null,MedicareBaseRate:241.94,MedicareBaseRate:339.69,Rex:2846.069858,WakeMed:3936.108616,drFeelgood:120.97,Rex:331.283044,WakeMed:339.6815635,drSchmidt:241.94},
+{ID:72141336,PrimaryDesc:"MRI",DrgDesc:"Mri neck spine w/o dye",IN_OUT:"Outpatient",Answer1:0,Answer2:0,Answer3:0,Answer4:0,Answer5:0,MedicareBaseRate:null,MedicareBaseRate:231.36,MedicareBaseRate:339.69,Rex:2846.069858,WakeMed:3936.108616,drFeelgood:115.68,Rex:331.283044,WakeMed:339.6815635,drSchmidt:231.36},
+{ID:72158336,PrimaryDesc:"MRI",DrgDesc:"Mri lumbar spine w/o & w/dye",IN_OUT:"Outpatient",Answer1:1,Answer2:0,Answer3:1,Answer4:0,Answer5:2,MedicareBaseRate:null,MedicareBaseRate:373.1,MedicareBaseRate:339.69,Rex:2846.069858,WakeMed:3936.108616,drFeelgood:186.55,Rex:331.283044,WakeMed:339.6815635,drSchmidt:373.1},
+{ID:70553336,PrimaryDesc:"MRI",DrgDesc:"Mri brain w/o & w/dye",IN_OUT:"Outpatient",Answer1:1,Answer2:1,Answer3:1,Answer4:1,Answer5:4,MedicareBaseRate:null,MedicareBaseRate:373.9,MedicareBaseRate:339.69,Rex:2846.069858,WakeMed:3936.108616,drFeelgood:186.95,Rex:331.283044,WakeMed:339.6815635,drSchmidt:373.9},
+{ID:73723336,PrimaryDesc:"MRI",DrgDesc:"Mri joint lwr extr w/o&w/dye",IN_OUT:"Outpatient",Answer1:0,Answer2:1,Answer3:0,Answer4:1,Answer5:2,MedicareBaseRate:null,MedicareBaseRate:459.55,MedicareBaseRate:339.69,Rex:2846.069858,WakeMed:3936.108616,drFeelgood:229.775,Rex:331.283044,WakeMed:339.6815635,drSchmidt:459.55},
+{ID:72156336,PrimaryDesc:"MRI",DrgDesc:"Mri neck spine w/o & w/dye",IN_OUT:"Outpatient",Answer1:0,Answer2:0,Answer3:0,Answer4:0,Answer5:0,MedicareBaseRate:null,MedicareBaseRate:374.24,MedicareBaseRate:339.69,Rex:2846.069858,WakeMed:3936.108616,drFeelgood:187.12,Rex:331.283044,WakeMed:339.6815635,drSchmidt:374.24}]
+
+} // end ans_cost_r object
+
+$scope.initialSelection = "";
+
+var getProcedureID = function (descriptionString, answersArray) {
+	return _(_.get(ans_cost_r)).chain().where({PrimaryDesc:descriptionString}).pluck("ID").value();
+};
 
 $scope.selected_procedure = "";
 $scope.process_list = _.map( _.get(process_r), function(procedure) { 
@@ -277,6 +325,8 @@ $scope.process_list = _.map( _.get(process_r), function(procedure) {
 	);
 $scope.process_q = process_q;
 
+
+//Callback from the TypeAhead on the first page
 $scope.onSelect = function($item, $model, $label) {
 	console.log("You selected " + $model );
 	
@@ -291,7 +341,7 @@ $scope.onSelect = function($item, $model, $label) {
 		} );
 	} );
 
-	
+	$scope.initialSelection = $model;
 	$scope.matched_questions = matched_questions;
 	//ModalDemoCtrl.open('lg');
 	//open('marketplace.html');
@@ -322,7 +372,7 @@ $scope.testfunction1 = function() {
 	)
 );
 
-console.log()
+
 
 };
 
@@ -379,6 +429,13 @@ for(var i=0; i<flatJect2.length; i++) {
 // }
 
 
+//TODO:  what should this do?
+$scope.getProcedure = function() {
+	console.log('Get Procedure Called');
+	console.log(getProcedureID($scope.initialSelection, $scope.answersClicked));
+}
+
+
 //DOES WORK - This is what the Modal's answesClicked is 'resolved' to:
 $scope.answersClicked = [];
 
@@ -392,6 +449,8 @@ $scope.answersClicked = [];
 		//console.log($scope.matched_questions);
 	}); 
 
+
+	//BELOW MOSTLY CUT AND PASTED FROM ANGULAR-IU MODAL DOCUMENTATION
   $scope.open = function (answersClicked) {
 
     var modalInstance = $modal.open({
@@ -412,8 +471,10 @@ $scope.answersClicked = [];
       $scope.selected = selectedItem;
 	  //$scope.answersClicked = result;
 	  console.log($scope.answersClicked);
+	  $scope.getProcedure();
     }, function () {
       $log.info('Modal talked to the hand at : ' + new Date());
+	  $scope.answersClicked = [];
     });
   };
 
@@ -438,7 +499,7 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, items, answersClicked)
 	
 	console.log($scope.answersClicked);
   };
-
+  //TODO: clear question answers on cancel button
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
 	//DOES NOT HAVE main controller scope
