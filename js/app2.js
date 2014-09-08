@@ -323,6 +323,10 @@ $scope.stageChange = function() {
 	else {
 		$scope.stage = 1;
 	}
+	
+	$scope.hospMin = _.min(getHospitalCosts($scope.selectedProcedure) );
+	$scope.docMin = _.min(getDoctorCosts($scope.selectedProcedure) );
+	
 }
 
 var descriptionFix = function(typeAheadDescription) {
@@ -567,7 +571,7 @@ var getDoctorCosts = function(procedureObject) {
 var getCost = function (procedureCode) {
 	//return _(_.get(ans_cost_r)).chain().where({ID:procedureCode}).pluck("drFeelgood", "drSchmidt").value();
 		//return _(ans_cost_r.procedures).where({ID:procedureCode});
-		
+		console.log("getCost called");
 		var hospitalCost = getHospitalCosts(getProcedureObjectById(procedureCode));
 		var doctorCost = getDoctorCosts(getProcedureObjectById(procedureCode));
 	var retVal = {
@@ -583,8 +587,20 @@ var getCost = function (procedureCode) {
 $scope.selectedFacility = '';
 $scope.selectedPhysician = '';
 
-$scope.hospMin = _.min(getHospitalCosts($scope.selectedProcedure) );
-$scope.docMin = _.min(getDoctorCosts($scope.selectedProcedure) );
+$scope.$watch('selectedProcedure', function() { 
+	console.log("scope watch triggered on selectedProcedure");
+	if(getHospitalCosts($scope.selectedProcedure) || getDoctorCosts($scope.selectedProcedure) ) {
+		//$scope.hospMin = _.first(getHospitalCosts($scope.selectedProcedure) );
+		//$scope.docMin = _.first(getDoctorCosts($scope.selectedProcedure) );
+		$scope.hospMin = selectedProcedure.Rex;
+		$scope.docMin = selectedProcedure.WakeMed;
+	}
+	
+
+	//console.log($scope.matched_questions);
+}); 
+
+
 
 
 });

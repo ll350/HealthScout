@@ -60,7 +60,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-plus"></span>Local Med Advisor</a>
+                <a class="navbar-brand" href="#" ng-click="stateChange()"><span class="glyphicon glyphicon-plus"></span>Local Med Advisor</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -166,7 +166,7 @@
 	        </div>
 	                <div class="container" ng-controller="UnderCtrl">
 	                        <div class="well well-lg">
-	                                <h2>Estimated Out of Pocket Cost to you                                                             <span class="label label-primary">${{hospMin + docMin}}1600-$4500</span></h2>
+	                                <h2>Estimated Out of Pocket Cost to you                                                             <span class="label label-primary" ng-model="hospMin">{{docMin + hospMin}}$1600-$4500</span></h2>
 	            </div>
 	                        <div class="bg-warning">
 	                                <h3 class="text-center">Specify a Facility and/or Physician to narrow cost range</h3>
@@ -176,7 +176,7 @@
 	            </div>
 	                        <!-- well well-lg -->
 	                        <div class="row">
-	                                <div class="thumbnail col-xs-6 col-md-6">
+	                                <div class="thumbnail col-xs-12 col-md-6">
 	                                        <div class="center-block">
 	                                                <h4 class="text-center">
 	                            Estimated Bill for Facility Services</h4>
@@ -238,7 +238,7 @@
 
 	                                        <p>*Facility charges typically bundle charges, instead of giving individual items
 	                </div><!-- thumbanail -->
-	                                <div class="thumbnail col-xs-6 col-md-6">
+	                                <div class="thumbnail col-xs-12 col-md-6">
 	                                        <div class="center-block">
 	                                                <h4 class="text-center">
 	                            Estimated Bill for Physiciain Services</h4>
@@ -295,7 +295,7 @@
 
 	</table>
 
-	                                        <p>*Facility charges typically bundle charges, instead of giving individual items
+	                                        <p>*Facility charges typically bundle charges, instead of giving individual items{{hospMin + docMin}}
 	                </div><!-- thumbanail -->
             
 	            </div> <!-- row -->
