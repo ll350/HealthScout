@@ -316,17 +316,32 @@ var ans_cost_r = {
 $scope.initialSelection = "";
 $scope.stage = 1;
 
+// $scope.hospMin = -1;
+// $scope.docMin = -1;
+// $scope.hospMax = -1;
+// $scope.docMax = -1;
+// $scope.selectedHospCost;
+// $scope.selectedDocCost;
+
+
 $scope.stageChange = function() {
 	if($scope.stage == 1) {
 		$scope.stage = 2;
 	}
 	else {
 		$scope.stage = 1;
+		$scope.resetStage();
 	}
 	
 	$scope.hospMin = _.min(getHospitalCosts($scope.selectedProcedure) );
 	$scope.docMin = _.min(getDoctorCosts($scope.selectedProcedure) );
+	$scope.hospMax = _.max(getHospitalCosts($scope.selectedProcedure) );
+	$scope.docMax = _.max(getDoctorCosts($scope.selectedProcedure) );
 	
+}
+
+var resetStage = function() {
+	console.log("reseting the stage: NOT REALLY");
 }
 
 var descriptionFix = function(typeAheadDescription) {
@@ -467,6 +482,14 @@ $scope.getProcedure = function() {
 	
 	$scope.stageChange();
 
+	$scope.hospMin = _.min(getHospCost($scope.selectedProcedure) );
+	$scope.hospMax = _.max(getHospCost($scope.selectedProcedure) );
+	$scope.docMin = _.min(getDoctorCost($scope.selectedProcedure) );
+	$scope.docMax = _.max(getDoctorCost($scope.selectedProcedure) );
+	console.log($scope.hospMin);
+	console.log($scope.hospMax);
+	console.log($scope.docMin);
+	console.log($scope.docMax);
 }
 
 
@@ -592,8 +615,14 @@ $scope.$watch('selectedProcedure', function() {
 	if(getHospitalCosts($scope.selectedProcedure) || getDoctorCosts($scope.selectedProcedure) ) {
 		//$scope.hospMin = _.first(getHospitalCosts($scope.selectedProcedure) );
 		//$scope.docMin = _.first(getDoctorCosts($scope.selectedProcedure) );
-		$scope.hospMin = selectedProcedure.Rex;
-		$scope.docMin = selectedProcedure.WakeMed;
+		$scope.hospMin = _.min(selectedProcedure.Rex, selectedProcedure.WakeMed);
+		$scope.hospMax = _.max(selectedProcedure.Rex, selectedProcedure.WakeMed);
+		$scope.docMin = _.min(selectedProcedure.drFeelGood, selectedProcedure.drSchmidt);
+		$scope.docMax = _.max(selectedProcedure.drFeelGood, selectedProcedure.drSchmidt);
+		console.log($scope.hospMin);
+		console.log($scope.hospMax);
+		console.log($scope.docMin);
+		console.log($scope.docMax);
 	}
 	
 

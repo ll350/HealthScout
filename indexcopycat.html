@@ -166,7 +166,7 @@
 	        </div>
 	                <div class="container" ng-controller="UnderCtrl">
 	                        <div class="well well-lg">
-	                                <h2>Estimated Out of Pocket Cost to you                                                             <span class="label label-primary" ng-model="hospMin">{{docMin + hospMin}}$1600-$4500</span></h2>
+	                                <h2>Estimated Out of Pocket Cost to you                                                             <span class="label label-primary" ng-model="hospMin">{{docMin + hospMin | currency:"$"}}-{{docMax + hospMax | currency:"$"}}</span></h2>
 	            </div>
 	                        <div class="bg-warning">
 	                                <h3 class="text-center">Specify a Facility and/or Physician to narrow cost range</h3>
