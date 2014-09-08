@@ -8,24 +8,74 @@
                 <meta name="description" content="">
                 <meta name="author" content="">
                 <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
-                <title>Blank Template for Bootstrap</title>
-                <!-- Bootstrap core CSS -->
-                <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
-                <!-- Custom styles for this template -->
-                <link href="new.css" rel="stylesheet">
+				<title>Cost for Procedure</title>
+ <!-- Bootstrap Core CSS -->
+ <link href="css/bootstrap.min.css" rel="stylesheet">
+
+ <!-- Custom CSS -->
+ <link href="css/landing-page.css" rel="stylesheet">
+
+ <!-- Custom Fonts -->
+ <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+ <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
                 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
                 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+					
+					<script src="js/angular.js"></script>
+					<script src="js/angular-strap.js"></script>
+					<script src="js/ui-bootstrap-tpls-0.11.0.js"></script>
+					<script src="js/underscore.js"></script>
+					<script src="js/underscore.db.js"></script>
+					<script src="js/app2.js"></script>
     </head>
-        <body>
+        <body ng-app="underscore">
+			
+		    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		        <div class="container">
+		            <!-- Brand and toggle get grouped for better mobile display -->
+		            <div class="navbar-header">
+		                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+		                    <span class="sr-only">Toggle navigation</span>
+		                    <span class="icon-bar"></span>
+		                    <span class="icon-bar"></span>
+		                    <span class="icon-bar"></span>
+		                </button>
+		                <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-plus"></span>Local Med Advisor</a>
+		            </div>
+		            <!-- Collect the nav links, forms, and other content for toggling -->
+		            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		                <ul class="nav navbar-nav navbar-right">
+		                   <li>
+		                       <a href="#" ><i class="fa fa-pencil-square-o fa-fw"></i> <span class="network-name">REGISTER</span></a>
+		                   </li>
+		                   <li>
+		                       <a href="#" ><i class="fa fa-refresh fa-fw"></i> <span class="network-name">SIGN IN</span></a>
+		                   </li>
+		                   <li>
+		                       <a href="#" ><i class="fa fa-map-marker fa-fw"></i> <span class="network-name">LOCATION</span></a>
+		                   </li>
+		                </ul>
+
+
+		            </div>
+		            <!-- /.navbar-collapse -->
+		        </div>
+		        <!-- /.container -->
+		    </nav>
+			<br/>
+			
+			
+			
+			
                 <div class="page-header">
                         <h1>Cost for Procedure &nbsp;                                                                                                <small>financing options below</small></h1>
         </div>
-                <div class="container">
+                <div class="container" ng-controller="UnderCtrl">
                         <div class="well well-lg">
-                                <h2>Estimated Out of Pocket Cost to you                                                             <span class="label label-primary">$1600-$4500</span></h2>
+                                <h2>Estimated Out of Pocket Cost to you                                                             <span class="label label-primary">${{hospMin + docMin}}1600-$4500</span></h2>
             </div>
                         <div class="bg-warning">
                                 <h3 class="text-center">Specify a Facility and/or Physician to narrow cost range</h3>
@@ -40,19 +90,21 @@
                                                 <h4 class="text-center">
                             Estimated Bill for Facility Services</h4>
                     </div>
+					
 					<!-- Single button -->
 					<div class="btn-group">
 					  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 					    Choose Facility<span class="caret"></span>
 					  </button>
 					  <ul class="dropdown-menu" role="menu">
-					    <li><a href="#">Action</a></li>
-					    <li><a href="#">Another action</a></li>
-					    <li><a href="#">Something else here</a></li>
+					    <li><a href="#">Rex</a></li>
+					    <li><a href="#">WakeMed</a></li>
 					    <li class="divider"></li>
-					    <li><a href="#">Separated link</a></li>
+					    <li><a href="#">Clear Selection</a></li>
 					  </ul>
+					
 					</div>
+
                                         <table class="table table-striped">
                                                 <tr>
                                                         <th>Charges</th>                            <th></th>
@@ -106,11 +158,10 @@
 					    Choose Physician<span class="caret"></span>
 					  </button>
 					  <ul class="dropdown-menu" role="menu">
-					    <li><a href="#">Action</a></li>
-					    <li><a href="#">Another action</a></li>
-					    <li><a href="#">Something else here</a></li>
+					    <li><a href="#">Dr. Feelgood</a></li>
+					    <li><a href="#">Dr. Schmidt</a></li>
 					    <li class="divider"></li>
-					    <li><a href="#">Separated link</a></li>
+					    <li><a href="#">Clear Selection</a></li>
 					  </ul>
 					</div>
                                          <table class="table table-striped">
@@ -169,7 +220,10 @@
                 <!-- Bootstrap core JavaScript
     ================================================== -->
                 <!-- Placed at the end of the document so the pages load faster -->
-                <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-                <script src="bootstrap/js/bootstrap.min.js"></script>
+			    <!-- jQuery Version 1.11.0 -->
+			    <script src="js/jquery-1.11.0.js"></script>
+
+			    <!-- Bootstrap Core JavaScript -->
+			    <script src="js/bootstrap.min.js"></script>
     </body>
 </html>

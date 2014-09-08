@@ -314,49 +314,17 @@ var ans_cost_r = {
 } // end ans_cost_r object
 
 $scope.initialSelection = "";
+$scope.stage = 1;
 
-//TODO: fix the ansersArray to check all the answers
-var getProcedureID = function (descriptionString, answersArray) {
-	var resultsArray = _(_.get(ans_cost_r)).chain().where(
-		{PrimaryDesc:descriptionFix(descriptionString),
-			 Answer1: answersArray[0].answer, Answer2: answersArray[0].answer, Answer3: answersArray[0].answer, Answer4: answersArray[0].answer}).pluck("ID").value();
-	
-	//Should only have one element anyway
-	return _.first(resultsArray);
-};
-
-var getProcedureObjectById = function(procedureCode) {
-	resultArray =  _(ans_cost_r.procedures).where({ID:procedureCode});
-	return _.first(resultArray); //Should only be one result anyway
-}
-
-var getHospitalCosts = function(procedureObject) {
-	console.log(procedureObject);
-	//otherObject = JSON.parse(procedureObject);
-	console.log(procedureObject["Rex"]);
-	console.log(procedureObject.WakeMed);
-	return [procedureObject.Rex, procedureObject.WakeMed];
-} 
-
-var getDoctorCosts = function(procedureObject) {
-	return [procedureObject.drFeelgood, procedureObject.drSchmidt];
-} 
-
-var getCost = function (procedureCode) {
-	//return _(_.get(ans_cost_r)).chain().where({ID:procedureCode}).pluck("drFeelgood", "drSchmidt").value();
-		//return _(ans_cost_r.procedures).where({ID:procedureCode});
-		
-		var hospitalCost = getHospitalCosts(getProcedureObjectById(procedureCode));
-		var doctorCost = getDoctorCosts(getProcedureObjectById(procedureCode));
-	var retVal = {
-		//Hospitals:getHospitalCosts(getProcedureObjectByID(procedureCode)),
-		//Doctors:getDoctorCosts(getProcedureObjectByID(procedureCode))
-		Hospitals:hospitalCost,
-		Doctors:doctorCost
+$scope.stageChange = function() {
+	if($scope.stage == 1) {
+		$scope.stage = 2;
 	}
-	return retVal;
-	
+	else {
+		$scope.stage = 1;
+	}
 }
+
 var descriptionFix = function(typeAheadDescription) {
 	descriptionMap = {
 		"Deliver a Baby":"Delivering a Baby",
@@ -478,7 +446,7 @@ for(var i=0; i<flatJect2.length; i++) {
 // 	console.log($scope.answers);
 // }
 
-
+$scope.selectedProcedure = {};
 //TODO:  what should this do?
 $scope.getProcedure = function() {
 	console.log('Get Procedure Called');
@@ -488,6 +456,13 @@ $scope.getProcedure = function() {
 	console.log(getProcedureObjectById(idCode));
 	var costIdentified = getCost(idCode);
 	console.log(costIdentified);
+	
+	//REAL WORK
+	$scope.selectedProcedure = getProcedureObjectById(idCode);
+	console.log($scope.selectedProcedure);
+	
+	$scope.stageChange();
+
 }
 
 
@@ -562,6 +537,54 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, items, answersClicked)
   };
 };
 
+//TODO: fix the ansersArray to check all the answers
+var getProcedureID = function (descriptionString, answersArray) {
+	var resultsArray = _(_.get(ans_cost_r)).chain().where(
+		{PrimaryDesc:descriptionFix(descriptionString),
+			 Answer1: answersArray[0].answer, Answer2: answersArray[0].answer, Answer3: answersArray[0].answer, Answer4: answersArray[0].answer}).pluck("ID").value();
+	
+	//Should only have one element anyway
+	return _.first(resultsArray);
+};
+
+var getProcedureObjectById = function(procedureCode) {
+	resultArray =  _(ans_cost_r.procedures).where({ID:procedureCode});
+	return _.first(resultArray); //Should only be one result
+}
+
+var getHospitalCosts = function(procedureObject) {
+	console.log(procedureObject);
+	//otherObject = JSON.parse(procedureObject);
+	console.log(procedureObject["Rex"]);
+	console.log(procedureObject.WakeMed);
+	return [procedureObject.Rex, procedureObject.WakeMed];
+} 
+
+var getDoctorCosts = function(procedureObject) {
+	return [procedureObject.drFeelgood, procedureObject.drSchmidt];
+} 
+
+var getCost = function (procedureCode) {
+	//return _(_.get(ans_cost_r)).chain().where({ID:procedureCode}).pluck("drFeelgood", "drSchmidt").value();
+		//return _(ans_cost_r.procedures).where({ID:procedureCode});
+		
+		var hospitalCost = getHospitalCosts(getProcedureObjectById(procedureCode));
+		var doctorCost = getDoctorCosts(getProcedureObjectById(procedureCode));
+	var retVal = {
+		//Hospitals:getHospitalCosts(getProcedureObjectByID(procedureCode)),
+		//Doctors:getDoctorCosts(getProcedureObjectByID(procedureCode))
+		Hospitals:hospitalCost,
+		Doctors:doctorCost
+	}
+	return retVal;
+	
+}
+
+$scope.selectedFacility = '';
+$scope.selectedPhysician = '';
+
+$scope.hospMin = _.min(getHospitalCosts($scope.selectedProcedure) );
+$scope.docMin = _.min(getDoctorCosts($scope.selectedProcedure) );
 
 
 });
