@@ -323,6 +323,32 @@ $scope.stage = 1;
 // $scope.selectedHospCost;
 // $scope.selectedDocCost;
 
+$scope.selectDoctor = function(doctorIndexNumber) {
+	var choosenDoctor = $scope.doctorMap(doctorIndexNumber);
+	//null is to clear any doctor currently set
+	if(!choosenDoctor) {
+		$scope.selectedDocCost = "";
+	}
+	else {
+		$scope.selectedDocCost = $scope.selectedProcedure[choosenDoctor];
+	}
+	console.log(choosenDoctor);
+	console.log($scope.selectedDocCost);
+	console.log($scope.selectedProcedure);
+}
+
+$scope.doctorMap = function(doctorNumber) {
+	if(doctorNumber < 0) {
+		return null;
+	}
+	else if(doctorNumber == 0) {
+		return "drFeelgood";
+	}
+	else {
+		return "drSchmidt";
+	}
+	
+}
 
 $scope.stageChange = function() {
 	if($scope.stage == 1) {
@@ -465,7 +491,8 @@ for(var i=0; i<flatJect2.length; i++) {
 // 	console.log($scope.answers);
 // }
 
-$scope.selectedProcedure = {};
+//TODO: Figure out why the next line blanked selectedProcedure in Stage 2
+//$scope.selectedProcedure = {};
 //TODO:  what should this do?
 $scope.getProcedure = function() {
 	console.log('Get Procedure Called');

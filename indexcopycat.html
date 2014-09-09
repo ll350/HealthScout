@@ -248,17 +248,17 @@
 						<div class="btn-group">
 						  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 						    Choose Physician<span class="caret"></span>
-						  </button>
+						  </button>{{choosenDoctor}}
 						  <ul class="dropdown-menu" role="menu">
-						    <li><a href="#">Dr. Feelgood</a></li>
-						    <li><a href="#">Dr. Schmidt</a></li>
+						    <li><a href="#" ng-click="selectDoctor(0)">Dr. Feelgood</a></li>
+						    <li><a href="#" ng-click="selectDoctor(1)">Dr. Schmidt</a></li>
 						    <li class="divider"></li>
-						    <li><a href="#">Clear Selection</a></li>
+						    <li><a href="#" ng-click="selectDoctor(-1)">Clear Selection</a></li>
 						  </ul>
 						</div>
 	                                         <table class="table table-striped">
 	                                                <tr>
-	                                                        <th>Charges</th>                            <th></th>
+	                                                        <th>Charges</th>                            <th>{{selectedDocCost}}</th>
 	                        </tr>
 	                                                <tr>
 	                                                        <td>Supplies</td>                            <td>N/A</td>
@@ -282,7 +282,7 @@
 	                                                        <td></td>                            <td></td>
 	                        </tr>
 	                                                <tr>
-	                                                        <td>                                <b>Total Charges*</b></td>                            <td>                                <b>{{docMin | currency:"$"}} - {{docMax | currency:"$"}}</b></td>
+	                                                        <td>                                <b>Total Charges*</b></td>                            <td>                                <b ng-show="selectedDocCost">{{selectedDocCost}}</b><b ng-hide="selectedDocCost">{{docMin | currency:"$"}} - {{docMax | currency:"$"}}</b></td>
 	                        </tr>
 	                                                <tr>
 	                                                        <td>                                <b>Total Adjustments</b></td>                            <td>                                <b>5,000 - 7,500</b></td>
