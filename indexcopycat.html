@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Landing Page - Start Bootstrap Theme</title>
+    <title>Inertia Layer - Local Med Advisor</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -91,9 +91,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-message">
-                        <h1>Index Copy HTML</h1>
-                        <h3>Stage is currently: {{stage}}</h3>
+                        <h1>Local Med Advisor</h1>
+                        <h3>Brought to you by Inertia Layer {{stage}}</h3>
                         <hr class="intro-divider">
+						<!--
                         <ul class="list-inline intro-social-buttons">
                             <li>
                                 <a href="#" class="btn btn-default btn-lg" ng-click="testfunction1()"><i class="fa fa-male fa-fw"></i> <span class="network-name">TEST One</span></a>
@@ -105,7 +106,7 @@
                                 <a href="#" class="btn btn-default btn-lg" ng-click="testfunction3()"><i class="fa fa-heart fa-fw"></i> <span class="network-name">TEST Three</span></a>
                             </li>
                         </ul>
-						
+						-->
 						<br/>
 						<form class="form-inline" role="form">
 						  <div class="form-group">
@@ -131,18 +132,18 @@
 										</div>
 									</div> <!-- ng-repeat="items in items" -->
 						           
-						            Selected: <b>{{ selected.item }}</b>
+						           <!-- Selected: <b>{{ selected.item }}</b> -->
 						        </div>
 						        <div class="modal-footer">
 						            <button class="btn btn-primary" ng-click="ok()">OK</button>
 						            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 						        </div>
 						    </script>
-
+<!--
 						    <div ng-show="selected">Selection from a modal: {{ selected }}</div>
 							<div ng-repeat="ans in answersClicked">Question from a modal: {{ ans.question }}<br/>
 							Answers from a modal: {{ ans.answer }}</div>
-							
+-->							
 							
 						</div>
 						<!-- .ModalDemoCtrl -->
@@ -166,7 +167,7 @@
 	        </div>
 	                <div class="container" ng-controller="UnderCtrl">
 	                        <div class="well well-lg">
-	                                <h2>Estimated Out of Pocket Cost to you                                                             <span class="label label-primary" ng-model="hospMin">{{docMin + hospMin | currency:"$"}}-{{docMax + hospMax | currency:"$"}}</span></h2>
+	                                <h2>Estimated Out of Pocket Cost to you                                                             <span class="label label-primary" ng-model="hospMin">{{docMin + hospMin | currency:"$"}} - {{docMax + hospMax | currency:"$"}}</span></h2>
 	            </div>
 	                        <div class="bg-warning">
 	                                <h3 class="text-center">Specify a Facility and/or Physician to narrow cost range</h3>
@@ -222,7 +223,7 @@
 	                                                        <td></td>                            <td></td>
 	                        </tr>
 	                                                <tr>
-	                                                        <td>                                <b>Total Charges*</b></td>                            <td>                                <b>5,000 - 7,500</b></td>
+	                                                        <td>                                <b>Total Charges*</b></td>                            <td>                                <b>{{hospMin | currency:"$"}} - {{hospMax | currency:"$"}}</b></td>
 	                        </tr>
 	                                                <tr>
 	                                                        <td>                                <b>Total Adjustments</b></td>                            <td>                                <b>5,000 - 7,500</b></td>
@@ -281,7 +282,7 @@
 	                                                        <td></td>                            <td></td>
 	                        </tr>
 	                                                <tr>
-	                                                        <td>                                <b>Total Charges*</b></td>                            <td>                                <b>5,000 - 7,500</b></td>
+	                                                        <td>                                <b>Total Charges*</b></td>                            <td>                                <b>{{docMin | currency:"$"}} - {{docMax | currency:"$"}}</b></td>
 	                        </tr>
 	                                                <tr>
 	                                                        <td>                                <b>Total Adjustments</b></td>                            <td>                                <b>5,000 - 7,500</b></td>
@@ -295,7 +296,7 @@
 
 	</table>
 
-	                                        <p>*Facility charges typically bundle charges, instead of giving individual items{{hospMin + docMin}}
+	                                        <p>*Facility charges typically bundle charges, instead of giving individual items
 	                </div><!-- thumbanail -->
             
 	            </div> <!-- row -->
@@ -317,11 +318,15 @@
 
     <div class="content-section-a"  ng-controller="UnderCtrl">
 		
-		<h1>Test showing the procedues</h1>
+		<h1>TESTING INSTRUCTIONS/STATUS</h1>
 		<ul>
-			<li ng-repeat="proc in process_list">
-				{{proc}}
-			</li>
+			<li>Deliver a Baby - Choose "Yes" for the first quesiton then hit "OK"</li>
+			<li>Spinal Fusion - Choose "Yes" for the first quesiton then hit "OK"</li>
+			<li>MRI  - Choose "Yes" for the first quesiton then hit "OK"</li>
+			<li>Laparoscopic cholecystectomy  - DOES NOT WORK</li>
+			<li>Cardiac Angioplasty or Stent   - DOES NOT WORK</li>
+			<li>Colonoscopy  - KINDA WORKS, JUST HIT OK ON THE POP UP</li>
+			<li><em>Click the "+Local Med Advisor" in the top corner to switch the home/bill pages </em></li>
 		</ul>
         <div class="container">
 

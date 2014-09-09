@@ -332,7 +332,7 @@ $scope.stageChange = function() {
 		$scope.stage = 1;
 		$scope.resetStage();
 	}
-	
+	//TODO:  This is the only place where setting these values works, find out why
 	$scope.hospMin = _.min(getHospitalCosts($scope.selectedProcedure) );
 	$scope.docMin = _.min(getDoctorCosts($scope.selectedProcedure) );
 	$scope.hospMax = _.max(getHospitalCosts($scope.selectedProcedure) );
