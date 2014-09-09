@@ -327,14 +327,22 @@ $scope.selectDoctor = function(doctorIndexNumber) {
 	var choosenDoctor = $scope.doctorMap(doctorIndexNumber);
 	//null is to clear any doctor currently set
 	if(!choosenDoctor) {
-		$scope.selectedDocCost = "";
+		$scope.selectedDocCost = null;
+		//Reset the Overall Costs
+		//TODO:  Change the logic (use a seperate function, to account for Insurance, OR DON'T?)
+		$scope.docMin = _.min(getDoctorCosts($scope.selectedProcedure) );
+		$scope.docMax = _.max(getDoctorCosts($scope.selectedProcedure) );
 	}
 	else {
 		$scope.selectedDocCost = $scope.selectedProcedure[choosenDoctor];
+		$scope.docMin = $scope.selectedDocCost;
+		$scope.docMax = $scope.selectedDocCost;
 	}
 	console.log(choosenDoctor);
 	console.log($scope.selectedDocCost);
 	console.log($scope.selectedProcedure);
+	//Need to display in the view
+	$scope.choosenDoctor = choosenDoctor;
 }
 
 $scope.doctorMap = function(doctorNumber) {
@@ -346,6 +354,42 @@ $scope.doctorMap = function(doctorNumber) {
 	}
 	else {
 		return "drSchmidt";
+	}
+	
+}
+
+$scope.selectHospital = function(hospitalIndexNumber) {
+	var choosenHospital = $scope.hospitalMap(hospitalIndexNumber);
+	//null is to clear any doctor currently set
+	if(!choosenHospital) {
+		$scope.selectedHospitalCost = null;
+		//Reset the Overall Costs
+		//TODO:  Change the logic (use a seperate function, to account for Insurance)
+		$scope.hospMin = _.min(getHospitalCosts($scope.selectedProcedure) );
+		$scope.hospMax = _.max(getHospitalCosts($scope.selectedProcedure) );
+		
+	}
+	else {
+		$scope.selectedHospitalCost = $scope.selectedProcedure[choosenHospital];
+		$scope.hospMin = $scope.selectedHospitalCost;
+		$scope.hospMax = $scope.selectedHospitalCost;
+	}
+	console.log(choosenHospital);
+	console.log($scope.selectedHospitalCost);
+	console.log($scope.selectedProcedure);
+	//Need to display in the view
+	$scope.choosenHospital = choosenHospital;
+}
+
+$scope.hospitalMap = function(hospitalNumber) {
+	if(hospitalNumber < 0) {
+		return null;
+	}
+	else if(hospitalNumber == 0) {
+		return "Rex";
+	}
+	else {
+		return "WakeMed";
 	}
 	
 }

@@ -170,7 +170,7 @@
 	                                <h2>Estimated Out of Pocket Cost to you                                                             <span class="label label-primary" ng-model="hospMin">{{docMin + hospMin | currency:"$"}} - {{docMax + hospMax | currency:"$"}}</span></h2>
 	            </div>
 	                        <div class="bg-warning">
-	                                <h3 class="text-center">Specify a Facility and/or Physician to narrow cost range</h3>
+	                                <h3 class="text-center" ng-hide="selectedHospitalCost + selectedDocCost">Specify a Facility and/or Physician to narrow cost range</h3>
 	            </div>
 	                        <div class="bg-danger">
 	                                <h3 class="text-center"><a href="#">Click here</a> to enter your insurance benefit info</h3>
@@ -184,22 +184,35 @@
 	                    </div>
 				
 						<!-- Single button -->
-						<div class="btn-group">
+						<div class="btn-group" ng-hide="choosenHospital">
 						  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 						    Choose Facility<span class="caret"></span>
 						  </button>
 						  <ul class="dropdown-menu" role="menu">
-						    <li><a href="#">Rex</a></li>
-						    <li><a href="#">WakeMed</a></li>
+						    <li><a href="#" ng-click="selectHospital(0)">Rex</a></li>
+						    <li><a href="#" ng-click="selectHospital(1)">WakeMed</a></li>
 						    <li class="divider"></li>
-						    <li><a href="#">Clear Selection</a></li>
+						    <li><a href="#" ng-click="selectHospital(-1)">Clear Selection</a></li>
+						  </ul>
+				
+						</div>
+						<!-- Single button, WITH Hospital selected -->
+						<div class="btn-group" ng-show="choosenHospital">
+						  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+						    {{choosenHospital}}<span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu" role="menu">
+						    <li><a href="#" ng-click="selectHospital(0)">Rex</a></li>
+						    <li><a href="#" ng-click="selectHospital(1)">WakeMed</a></li>
+						    <li class="divider"></li>
+						    <li><a href="#" ng-click="selectHospital(-1)">Clear Selection</a></li>
 						  </ul>
 				
 						</div>
 
 	                                        <table class="table table-striped">
 	                                                <tr>
-	                                                        <th>Charges</th>                            <th></th>
+	                                                        <th>Charges</th>                            <th>{{selectedHospitalCost | currency:"$"}}</th>
 	                        </tr>
 	                                                <tr>
 	                                                        <td>Supplies</td>                            <td>N/A</td>
@@ -223,7 +236,7 @@
 	                                                        <td></td>                            <td></td>
 	                        </tr>
 	                                                <tr>
-	                                                        <td>                                <b>Total Charges*</b></td>                            <td>                                <b>{{hospMin | currency:"$"}} - {{hospMax | currency:"$"}}</b></td>
+	                                                        <td>                                <b>Total Charges*</b></td>                            <td><b ng-show="selectedHospitalCost">{{selectedHospitalCost | currency:"$"}}</b>                                <b ng-hide="selectedHospitalCost">{{hospMin | currency:"$"}} - {{hospMax | currency:"$"}}</b></td>
 	                        </tr>
 	                                                <tr>
 	                                                        <td>                                <b>Total Adjustments</b></td>                            <td>                                <b>5,000 - 7,500</b></td>
@@ -244,11 +257,23 @@
 	                                                <h4 class="text-center">
 	                            Estimated Bill for Physiciain Services</h4>
 	                    </div>
-						<!-- Single button -->
-						<div class="btn-group">
+						<!-- Single button , no Doctor Selected-->
+						<div class="btn-group" ng-hide="choosenDoctor">
 						  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 						    Choose Physician<span class="caret"></span>
-						  </button>{{choosenDoctor}}
+						  </button>
+						  <ul class="dropdown-menu" role="menu">
+						    <li><a href="#" ng-click="selectDoctor(0)">Dr. Feelgood</a></li>
+						    <li><a href="#" ng-click="selectDoctor(1)">Dr. Schmidt</a></li>
+						    <li class="divider"></li>
+						    <li><a href="#" ng-click="selectDoctor(-1)">Clear Selection</a></li>
+						  </ul>
+						</div>
+						<!-- Single button , WITH Doctor Selected-->
+						<div class="btn-group" ng-show="choosenDoctor">
+						  <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+						    {{choosenDoctor | uppercase}}<span class="caret"></span>
+						  </button>
 						  <ul class="dropdown-menu" role="menu">
 						    <li><a href="#" ng-click="selectDoctor(0)">Dr. Feelgood</a></li>
 						    <li><a href="#" ng-click="selectDoctor(1)">Dr. Schmidt</a></li>
@@ -258,7 +283,7 @@
 						</div>
 	                                         <table class="table table-striped">
 	                                                <tr>
-	                                                        <th>Charges</th>                            <th>{{selectedDocCost}}</th>
+	                                                        <th>Charges</th>                            <th>{{selectedDocCost | currency:"$"}}</th>
 	                        </tr>
 	                                                <tr>
 	                                                        <td>Supplies</td>                            <td>N/A</td>
@@ -282,7 +307,7 @@
 	                                                        <td></td>                            <td></td>
 	                        </tr>
 	                                                <tr>
-	                                                        <td>                                <b>Total Charges*</b></td>                            <td>                                <b ng-show="selectedDocCost">{{selectedDocCost}}</b><b ng-hide="selectedDocCost">{{docMin | currency:"$"}} - {{docMax | currency:"$"}}</b></td>
+	                                                        <td>                                <b>Total Charges*</b></td>                            <td>                                <b ng-show="selectedDocCost">{{selectedDocCost | currency:"$"}}</b><b ng-hide="selectedDocCost">{{docMin | currency:"$"}} - {{docMax | currency:"$"}}</b></td>
 	                        </tr>
 	                                                <tr>
 	                                                        <td>                                <b>Total Adjustments</b></td>                            <td>                                <b>5,000 - 7,500</b></td>
