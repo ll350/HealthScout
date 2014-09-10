@@ -168,14 +168,18 @@
 	                <div class="container" ng-controller="UnderCtrl">
 	                        <div class="well well-lg">
 	                                <h2>Estimated Out of Pocket Cost to you                                                             <span class="label label-primary" ng-model="hospMin">{{docMin + hospMin | currency:"$"}} - {{docMax + hospMax | currency:"$"}}</span></h2>
-	            </div>
+	            </div><!-- well well-lg -->
+				<div ng-show="selectedHospitalCost + selectedDocCost"><h3>&nbsp;</h3>
+					</div> <!-- take up the same amount of space when the warning is hidden  -->
+			                       
 	                        <div class="bg-warning">
 	                                <h3 class="text-center" ng-hide="selectedHospitalCost + selectedDocCost">Specify a Facility and/or Physician to narrow cost range</h3>
 	            </div>
 	                        <div class="bg-danger">
-	                                <h3 class="text-center"><a href="#">Click here</a> to enter your insurance benefit info</h3>
+	                                <h3 class="text-center"><a href="#" ng-click="insuaranceOpen()">Click here</a> to enter your insurance benefit info</h3>
 	            </div>
-	                        <!-- well well-lg -->
+
+			
 	                        <div class="row">
 	                                <div class="thumbnail col-xs-12 col-md-6">
 	                                        <div class="center-block">
@@ -337,8 +341,142 @@
 		</div> <!-- the Bill page -->
 	</div>
 		
+<!-- SECOND MODAL -->
+	<!-- SECOND MODAL -->
+	<!-- SECOND MODAL -->
+	<!-- SECOND MODAL -->
+
+						<div >
+						    <script type="text/ng-template" id="mySecondModalContent.html">
+						        <div class="modal-header">
+						            <h3 class="modal-title">Please answer the following questions</h3>
+						        </div>
+						        <div class="modal-body">
+									
+									<div class="panel panel-default">
+									    <div class="panel-heading">My remaining deductable is:</div>
+									    <div class="panel-body">
+		                                    <form class="form-inline">
+		                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">$</span>
+                                                <input type="text" class="form-control" id="dollarAmountPOV" placeholder="Remaing Deductable">
+                                                <span class="input-group-addon">.00</span>
+											</div>
+										</div>
+									</form>
+								
+									
+								</div> <!--panelbody -->
+									</div> <!--panel panel-default -->
+									
+									<div class="panel panel-default">
+									    <div class="panel-heading"><em>BEFORE</em> my deductible amount is reached, My insurance pays a percentage:</div>
+									    <div class="panel-body">
+		                                    <form class="form-inline">I pay:
+		                                        <div class="form-group">
+                                            <div class="input-group">
+                                                                                              <input type="text" class="form-control" id="dollarAmountPOV" placeholder="My share">
+                                                <span class="input-group-addon">%</span>
+									</div>
+									</div>
+                                                              
+				  		                                      My Insurance pays:  <div class="form-group">
+				                                              <div class="input-group">
+															                                 <input type="text" class="form-control" id="dollarAmountPOV" placeholder="Coinsurance percentage">
+                                               <span class="input-group-addon">%</span>
+										</div>
+										</div>
+										
+									</form>
+									
+								
+									
+								</div> <!--panelbody -->
+									</div> <!--panel panel-default -->
+									
+									<div class="panel panel-default">
+									    <div class="panel-heading"><em>AFTER</em> my deductible amount is reached, My insurance pays a percentage:</div>
+									    <div class="panel-body">
+		                                    <form class="form-inline">I pay:
+		                                        <div class="form-group">
+                                            <div class="input-group">
+                                                                                              <input type="text" class="form-control" id="dollarAmountPOV" placeholder="My Share">
+                                                <span class="input-group-addon">%</span>
+									</div>
+									</div>
+                                                              
+				  		                                      My Insurance pays:  <div class="form-group">
+				                                              <div class="input-group">
+															                                 <input type="text" class="form-control" id="dollarAmountPOV" placeholder="Coinsurance percentage">
+                                               <span class="input-group-addon">%</span>
+										</div>
+										</div>
+										
+									</form>
+								
+									
+								</div> <!--panelbody -->
+									</div> <!--panel panel-default -->
+									
+									<div class="panel panel-default">
+									    <div class="panel-heading">I have a <em>Copay</em> for this procedure:</div>
+									    <div class="panel-body">
+		                                    <form class="form-inline">
+		                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">$</span>
+                                                <input type="text" class="form-control" id="dollarAmountPOV" placeholder="Copay Amount">
+                                                <span class="input-group-addon">.00</span>
+											</div>
+										</div>
+									</form>
+								
+									
+								</div> <!--panelbody -->
+									</div> <!--panel panel-default -->
+									
+									<div class="panel panel-default">
+									    <div class="panel-heading">I have a <em>Maximum Insurance Benefit</em></div>
+									    <div class="panel-body">
+		                                    <form class="form-inline">
+		                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">$</span>
+                                                <input type="text" class="form-control" id="dollarAmountPOV" placeholder="Max Insurance Payout">
+                                                <span class="input-group-addon">.00</span>
+											</div>
+										</div>
+									</form>
+								
+									
+								</div> <!--panelbody -->
+									</div> <!--panel panel-default -->
+						           
+						           <!-- Selected: <b>{{ selected.item }}</b> -->
+						        </div>
+						        <div class="modal-footer">
+						            <button class="btn btn-primary" ng-click="ok()">OK</button>
+						            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+						        </div>
+						    </script>
+<!--
+						    <div ng-show="selected">Selection from a modal: {{ selected }}</div>
+							<div ng-repeat="ans in answersClicked">Question from a modal: {{ ans.question }}<br/>
+							Answers from a modal: {{ ans.answer }}</div>
+-->							
+							
+						</div>
 
 
+
+
+<!-- END SECOND MODAL -->
+<!-- END SECOND MODAL -->
+<!-- END SECOND MODAL -->
+<!-- END SECOND MODAL -->
+	
+	
     <!-- Page Content -->
 
     <div class="content-section-a"  ng-controller="UnderCtrl">

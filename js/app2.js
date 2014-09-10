@@ -635,6 +635,67 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, items, answersClicked)
   };
 };
 
+//FOR  THE SECOND MODAL (THE ONE FOR INSURANCE IN STAGE 2)
+$scope.checkedInsuranceItems = [true, true, true, true, true];
+$scope.insuranceValues = [];
+
+	//BELOW MOSTLY CUT AND PASTED FROM ANGULAR-IU MODAL DOCUMENTATION
+  $scope.insuaranceOpen = function (insuranceValues) {
+
+    var modalInstance = $modal.open({
+      templateUrl: 'mySecondModalContent.html',
+      controller: SecondModalInstanceCtrl,
+      size: 'lg',
+      resolve: {
+        checkedInsuranceItems: function () {
+          return  $scope.checkedInsuranceItems;
+        },
+		insuranceValues: function() {
+			return $scope.insuranceValues;
+		}
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem, answers) {
+      //$scope.selected = selectedItem;
+	  //$scope.answersClicked = result;
+	  console.log($scope.insuranceValues);
+	  //$scope.getProcedure();
+    }, function () {
+      $log.info('Modal talked to the hand at : ' + new Date());
+	  $scope.insuranceValues = [];
+    });
+  };
+
+  $scope.storeInsuranceValue = function(ans) {
+  	$scope.insuranceValues = ans;
+  }
+// Please note that $modalInstance represents a modal window (instance) dependency.
+// It is not the same as the $modal service used above.
+
+var SecondModalInstanceCtrl = function ($scope, $modalInstance, checkedInsuranceItems, insuranceValues) {
+
+  $scope.checkedInsuranceItems = checkedInsuranceItems;
+  $scope.selected = {
+    item: $scope.checkedInsuranceItems[0]
+  };
+
+  $scope.insuranceValues = insuranceValues;
+
+  $scope.ok = function () {
+    $modalInstance.close($scope.selected.item, $scope.answersClicked);
+	//TESTING
+	
+	console.log($scope.answersClicked);
+  };
+  //TODO: clear question answers on cancel button
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+	//DOES NOT HAVE main controller scope
+	console.log($scope.matched_questions);
+  };
+};
+
 //TODO: fix the ansersArray to check all the answers
 var getProcedureID = function (descriptionString, answersArray) {
 	var resultsArray = _(_.get(ans_cost_r)).chain().where(
