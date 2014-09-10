@@ -16,6 +16,8 @@
 
     <!-- Custom CSS -->
     <link href="css/landing-page.css" rel="stylesheet">
+	
+	<link href="css/style.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -317,7 +319,7 @@
 	                                                        <td>                                <b>Total Adjustments</b></td>                            <td>                                <b>5,000 - 7,500</b></td>
 	                        </tr>
 	                                                <tr>
-	                                                        <td>                                <b>Total Insurance Payment</b></td>                            <td>                                <b>5,000 - 7,500</b></td>
+	                                                        <td>                                <b>Total Insurance Payment</b></td>                            <td>                                <b>{{specifiedInsuranceBenfits.deductable}}</b></td>
 	                        </tr>
 	                                                <tr>
 	                                                        <td>                                <b>Total Patient Payment</b></td>                            <td>                                <b>5,000 - 7,500</b></td>
@@ -353,14 +355,14 @@
 						        </div>
 						        <div class="modal-body">
 									
-									<div class="panel panel-default">
-									    <div class="panel-heading">My remaining deductable is:</div>
+									<div class="panel panel-default" ng-show="checkedInsuranceItems[0]">
+									    <div class="panel-heading"><input type="checkbox" ng-model="checkedInsuranceItems[0]">   My remaining deductable is:</div>
 									    <div class="panel-body">
 		                                    <form class="form-inline">
 		                                        <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon">$</span>
-                                                <input type="text" class="form-control" id="dollarAmountPOV" placeholder="Remaing Deductable">
+                                                <input type="text" class="form-control" id="dollarAmountPOV" placeholder="Remaing Deductable" ng-model="insuranceValues[0]">
                                                 <span class="input-group-addon">.00</span>
 											</div>
 										</div>
@@ -370,20 +372,20 @@
 								</div> <!--panelbody -->
 									</div> <!--panel panel-default -->
 									
-									<div class="panel panel-default">
-									    <div class="panel-heading"><em>BEFORE</em> my deductible amount is reached, My insurance pays a percentage:</div>
+									<div class="panel panel-default"ng-show="checkedInsuranceItems[1]">
+									    <div class="panel-heading"><input type="checkbox" ng-model="checkedInsuranceItems[1]">   <em>BEFORE</em> my deductible amount is reached, My insurance pays a percentage:</div>
 									    <div class="panel-body">
 		                                    <form class="form-inline">I pay:
 		                                        <div class="form-group">
-                                            <div class="input-group">
-                                                                                              <input type="text" class="form-control" id="dollarAmountPOV" placeholder="My share">
+                                            <div class="input-group col-sm-offset-4">
+                                                                                              <input type="text" class="form-control" id="dollarAmountPOV" placeholder="My share" ng-model="insuranceValues[1]">
                                                 <span class="input-group-addon">%</span>
 									</div>
-									</div>
+									</div><br/>
                                                               
 				  		                                      My Insurance pays:  <div class="form-group">
-				                                              <div class="input-group">
-															                                 <input type="text" class="form-control" id="dollarAmountPOV" placeholder="Coinsurance percentage">
+				                                              <div class="input-group col-sm-offset-1">
+															                                 <input type="text" class="form-control" id="dollarAmountPOV" placeholder="Coinsurance percentage" value="{{100 - insuranceValues[1]}}">
                                                <span class="input-group-addon">%</span>
 										</div>
 										</div>
@@ -395,20 +397,20 @@
 								</div> <!--panelbody -->
 									</div> <!--panel panel-default -->
 									
-									<div class="panel panel-default">
-									    <div class="panel-heading"><em>AFTER</em> my deductible amount is reached, My insurance pays a percentage:</div>
+									<div class="panel panel-default"ng-show="checkedInsuranceItems[2]">
+									    <div class="panel-heading"><input type="checkbox" ng-model="checkedInsuranceItems[2]">   <em>AFTER</em> my deductible amount is reached, My insurance pays a percentage:</div>
 									    <div class="panel-body">
 		                                    <form class="form-inline">I pay:
 		                                        <div class="form-group">
-                                            <div class="input-group">
-                                                                                              <input type="text" class="form-control" id="dollarAmountPOV" placeholder="My Share">
+                                            <div class="input-group col-sm-offset-4">
+                                                                                              <input type="text" class="form-control" id="dollarAmountPOV" placeholder="My Share" ng-model="insuranceValues[2]">
                                                 <span class="input-group-addon">%</span>
 									</div>
-									</div>
+									</div><br/>
                                                               
 				  		                                      My Insurance pays:  <div class="form-group">
-				                                              <div class="input-group">
-															                                 <input type="text" class="form-control" id="dollarAmountPOV" placeholder="Coinsurance percentage">
+				                                              <div class="input-group col-sm-offset-1">
+															                                 <input type="text" class="form-control" id="dollarAmountPOV" placeholder="Coinsurance percentage" value="{{100 - insuranceValues[2]}}">
                                                <span class="input-group-addon">%</span>
 										</div>
 										</div>
@@ -419,14 +421,14 @@
 								</div> <!--panelbody -->
 									</div> <!--panel panel-default -->
 									
-									<div class="panel panel-default">
-									    <div class="panel-heading">I have a <em>Copay</em> for this procedure:</div>
+									<div class="panel panel-default"ng-show="checkedInsuranceItems[3]">
+									    <div class="panel-heading"><input type="checkbox" ng-model="checkedInsuranceItems[3]">   I have a <em>Copay</em> for this procedure:</div>
 									    <div class="panel-body">
 		                                    <form class="form-inline">
 		                                        <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon">$</span>
-                                                <input type="text" class="form-control" id="dollarAmountPOV" placeholder="Copay Amount">
+                                                <input type="text" class="form-control" id="dollarAmountPOV" placeholder="Copay Amount" ng-model="insuranceValues[3]">
                                                 <span class="input-group-addon">.00</span>
 											</div>
 										</div>
@@ -436,14 +438,14 @@
 								</div> <!--panelbody -->
 									</div> <!--panel panel-default -->
 									
-									<div class="panel panel-default">
-									    <div class="panel-heading">I have a <em>Maximum Insurance Benefit</em></div>
+									<div class="panel panel-default"ng-show="checkedInsuranceItems[4]">
+									    <div class="panel-heading"><input type="checkbox" ng-model="checkedInsuranceItems[4]">   I have a <em>Maximum Insurance Benefit</em></div>
 									    <div class="panel-body">
 		                                    <form class="form-inline">
 		                                        <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon">$</span>
-                                                <input type="text" class="form-control" id="dollarAmountPOV" placeholder="Max Insurance Payout">
+                                                <input type="text" class="form-control" id="dollarAmountPOV" placeholder="Max Insurance Payout" ng-model="insuranceValues[4]">
                                                 <span class="input-group-addon">.00</span>
 											</div>
 										</div>

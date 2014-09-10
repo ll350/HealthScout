@@ -638,6 +638,34 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, items, answersClicked)
 //FOR  THE SECOND MODAL (THE ONE FOR INSURANCE IN STAGE 2)
 $scope.checkedInsuranceItems = [true, true, true, true, true];
 $scope.insuranceValues = [];
+$scope.specifiedInsuranceBenfits = {
+	deductable: 0,
+	preDeductableLiability: 0.0,
+	postDeductableLiability: 0.0,
+	copay: 0,
+	MaxInsurancePayout: 1000000
+	//Didn't know what infinity was in javascript
+};
+
+$scope.calculateInsurance = function(insuranceValues) {
+	if($scope.checkedInsuranceItems[0]) {
+		$scope.specifiedInsuranceBenfits.deductable = insuranceValues[0];
+	}
+	if($scope.checkedInsuranceItems[0]) {
+		$scope.specifiedInsuranceBenfits.preDeductableLiability = (insuranceValues[1] / 100);
+	}
+	if($scope.checkedInsuranceItems[0]) {
+		$scope.specifiedInsuranceBenfits.postDeductableLiability = (insuranceValues[2] / 100);
+	}
+	if($scope.checkedInsuranceItems[0]) {
+		$scope.specifiedInsuranceBenfits.copay = insuranceValues[3];
+	}
+	if($scope.checkedInsuranceItems[0]) {
+		$scope.specifiedInsuranceBenfits.MaxInsurancePayout = insuranceValues[4];
+	}
+	console.log($scope.specifiedInsuranceBenfits.deductable);
+
+}
 
 	//BELOW MOSTLY CUT AND PASTED FROM ANGULAR-IU MODAL DOCUMENTATION
   $scope.insuaranceOpen = function (insuranceValues) {
@@ -661,9 +689,11 @@ $scope.insuranceValues = [];
 	  //$scope.answersClicked = result;
 	  console.log($scope.insuranceValues);
 	  //$scope.getProcedure();
+	  $scope.calculateInsurance($scope.insuranceValues);
     }, function () {
       $log.info('Modal talked to the hand at : ' + new Date());
 	  $scope.insuranceValues = [];
+	  $scope.checkedInsuranceItems = [true, true, true, true, true];
     });
   };
 
@@ -683,16 +713,16 @@ var SecondModalInstanceCtrl = function ($scope, $modalInstance, checkedInsurance
   $scope.insuranceValues = insuranceValues;
 
   $scope.ok = function () {
-    $modalInstance.close($scope.selected.item, $scope.answersClicked);
+    $modalInstance.close($scope.checkedInsuranceItems, $scope.insuranceValues);
 	//TESTING
-	
-	console.log($scope.answersClicked);
+
+	console.log($scope.insuranceValues);
   };
   //TODO: clear question answers on cancel button
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
 	//DOES NOT HAVE main controller scope
-	console.log($scope.matched_questions);
+	console.log($scope.insuranceValues);
   };
 };
 
