@@ -638,33 +638,96 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, items, answersClicked)
 //FOR  THE SECOND MODAL (THE ONE FOR INSURANCE IN STAGE 2)
 $scope.checkedInsuranceItems = [true, true, true, true, true];
 $scope.insuranceValues = [];
-$scope.specifiedInsuranceBenfits = {
+$scope.specifiedInsuranceBenefits = {
 	deductable: 0,
-	preDeductableLiability: 0.0,
 	postDeductableLiability: 0.0,
 	copay: 0,
-	MaxInsurancePayout: 1000000
+	MaxOutOfPocket: 1000000
 	//Didn't know what infinity was in javascript
 };
 
 $scope.calculateInsurance = function(insuranceValues) {
 	if($scope.checkedInsuranceItems[0]) {
-		$scope.specifiedInsuranceBenfits.deductable = insuranceValues[0];
+		$scope.specifiedInsuranceBenefits.deductable = insuranceValues[0];
 	}
-	if($scope.checkedInsuranceItems[0]) {
-		$scope.specifiedInsuranceBenfits.preDeductableLiability = (insuranceValues[1] / 100);
-	}
-	if($scope.checkedInsuranceItems[0]) {
-		$scope.specifiedInsuranceBenfits.postDeductableLiability = (insuranceValues[2] / 100);
-	}
-	if($scope.checkedInsuranceItems[0]) {
-		$scope.specifiedInsuranceBenfits.copay = insuranceValues[3];
-	}
-	if($scope.checkedInsuranceItems[0]) {
-		$scope.specifiedInsuranceBenfits.MaxInsurancePayout = insuranceValues[4];
-	}
-	console.log($scope.specifiedInsuranceBenfits.deductable);
 
+	if($scope.checkedInsuranceItems[1]) {
+		$scope.specifiedInsuranceBenefits.postDeductableLiability = (insuranceValues[1] / 100);
+	}
+	if($scope.checkedInsuranceItems[2]) {
+		$scope.specifiedInsuranceBenefits.copay = insuranceValues[2];
+	}
+	if($scope.checkedInsuranceItems[3]) {
+		$scope.specifiedInsuranceBenefits.MaxOutOfPocket = insuranceValues[4];
+	}
+	console.log($scope.specifiedInsuranceBenefits.deductable);
+	$scope.insuranceMoneyUpdate();
+
+}
+
+$scope.insuranceMoneyUpdate = function() {
+
+	var minPayment =  $scope.paymentCalculator($scope.docMin, $scope.hospMin, $scope.specifiedInsuranceBenefits);
+
+	var maxPayment =  $scope.paymentCalculator($scope.docMax, $scope.hospMax, $scope.specifiedInsuranceBenefits);
+
+	var selectedPayment =  $scope.paymentCalculator($scope.selectedDocCost, $scope.selectedHospitalCost, $scope.specifiedInsuranceBenefits);
+
+	$scope.minPayment = minPayment;
+	$scope.maxPayment = maxPayment;
+	$scope.selectedPayment = selectedPayment;
+	console.log("insuranceMoneyUpdate");
+	console.log(minPayment);
+	console.log(maxPayment);
+	console.log(selectedPayment);
+
+}
+
+$scope.paymentCalculator = function(docCharges, hospitalCharges, insuranceBenefits) {
+	var deductable = insuranceBenefits.deductable;
+	var outOfPocketLimit = insuranceBenefits.MaxOutOfPocket;
+	var retVal = {payDoc: 0, payHospital: 0, insuranceCoverage: 0};
+	if(docCharges <= deductable ) {
+		retVal.payDoc = docCharges;
+		deductable -= docCharges;
+	}
+	else {
+		//add deductable to payout, add non-coinsurance above deducatble, add rest to coinsurance le
+		retVal.payDoc += deductable;
+		retVal.payDoc += ( (docCharges - deductable) * insuranceBenefits.postDeducableLiability);
+		retVal.insuranceCoverage = ( (docCharges - deductable) *  (1 - insuranceBenefits.postDeducableLiability) );
+		deductable = 0; // zerp deductable
+		retVal.payDoc += insuranceBenefits.copay;
+		if(retVal.payDoc >= outOfPocketLimit) {
+			retVal.payDoc = outOfPocketLimit;
+			outOfPocketLimit = 0;
+		}
+		else {
+			outOfPocketLimit -= retVal.payDoc;
+		}
+	}
+
+	if(hospitalCharges <= deductable ) {
+		retVal.payHospital = hospitalCharges;
+		deductable -= hospitalCharges;
+	}
+	else {
+		//add deductable to payout, add non-coinsurance above deducatble, add rest to coinsurance le
+		retVal.payHospital += deductable;
+		retVal.payHospital += ( (hospitalCharges - deductable) * insuranceBenefits.postDeducableLiability);
+		retVal.insuranceCoverage = ( (hospitalCharges - deductable) *  (1 - insuranceBenefits.postDeducableLiability) );
+		deductable = 0; // zerp deductable
+		retVal.payHospital += insuranceBenefits.copay;
+		if(retVal.payHospital >= outOfPocketLimit) {
+			retVal.payHospital = outOfPocketLimit;
+			outOfPocketLimit = 0;
+		}
+		else {
+			outOfPocketLimit -= retVal.payHospital;
+		}
+	}
+
+	return retVal;
 }
 
 	//BELOW MOSTLY CUT AND PASTED FROM ANGULAR-IU MODAL DOCUMENTATION
@@ -791,7 +854,11 @@ $scope.$watch('selectedProcedure', function() {
 	//console.log($scope.matched_questions);
 }); 
 
-
+$scope.$watch('insuranceValues', function() { 
+	if($scope.insuranceBenefits) {
+		$scope.insuranceMoneyUpdate(); 
+	}
+});
 
 
 });
