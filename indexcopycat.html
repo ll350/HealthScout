@@ -169,7 +169,7 @@
 	        </div>
 	                <div class="container" ng-controller="UnderCtrl">
 	                        <div class="well well-lg">
-	                                <h2>Estimated Out of Pocket Cost to you                                                             <span class="label label-primary" ng-model="hospMin">{{docMin + hospMin | currency:"$"}} - {{docMax + hospMax | currency:"$"}}</span></h2>
+	                                <h2>Estimated Out of Pocket Cost to you                                                             <span class="label label-primary" ng-model="hospMin">{{docMin + hospMin + specifiedInsuranceBenefits.copay - minPayment.insuranceCoverage[0] - minPayment.insuranceCoverage[1]| currency:"$"}} - {{docMax + hospMax + specifiedInsuranceBenefits.copay - maxPayment.insuranceCoverage[0] - maxPayment.insuranceCoverage[1]| currency:"$"}}</span></h2>
 	            </div><!-- well well-lg -->
 				<div ng-show="selectedHospitalCost + selectedDocCost"><h3>&nbsp;</h3>
 					</div> <!-- take up the same amount of space when the warning is hidden  -->
@@ -178,7 +178,7 @@
 	                                <h3 class="text-center" ng-hide="selectedHospitalCost + selectedDocCost">Specify a Facility and/or Physician to narrow cost range</h3>
 	            </div>
 	                        <div class="bg-danger">
-	                                <h3 class="text-center"><a href="#" ng-click="insuaranceOpen()">Click here</a> to enter your insurance benefit info</h3>
+	                                <h3 class="text-center"><a href="#" ng-click="insuaranceOpen()">Click here</a> to update your insurance benefits</h3>
 	            </div>
 
 			
@@ -245,13 +245,13 @@
 	                                                        <td>                                <b>Total Charges*</b></td>                            <td><b ng-show="selectedHospitalCost">{{selectedHospitalCost | currency:"$"}}</b>                                <b ng-hide="selectedHospitalCost">{{hospMin | currency:"$"}} - {{hospMax | currency:"$"}}</b></td>
 	                        </tr>
 	                                                <tr>
-	                                                        <td>                                <b>Total Adjustments</b></td>                            <td>                                <b>5,000 - 7,500</b></td>
+	                                                        <td>                                <b>Total Adjustments</b></td>                            <td>                                <b>N/A</b></td>
 	                        </tr>
 	                                                <tr>
-	                                                        <td>                                <b>Total Insurance Payment</b></td>                            <td>                                <b ng-show="selectedHospitalCost">{{selectedPayment.insuranceCoverage | currency:"$"}}</b>                                <b ng-hide="selectedHospitalCost">{{minPayment.insuranceCoverage | currency:"$"}} - {{hospMax | currency:"$"}}</b></td>
+	                                                        <td>                                <b>Total Insurance Payment</b></td>                            <td>                                <b ng-show="selectedHospitalCost">{{selectedPayment.insuranceCoverage[1] | currency:"$"}}</b>                                <b ng-hide="selectedHospitalCost">{{minPayment.insuranceCoverage[1] | currency:"$"}} - {{maxPayment.insuranceCoverage[1] | currency:"$"}}</b></td>
 	                        </tr>
 	                                                <tr>
-	                                                        <td>                                <b>Total Patient Payment</b></td>                            <td>                                <b>5,000 - 7,500</b></td>
+	                                                        <td>                                <b>Total Patient Payment</b></td>                            <td>                                <b ng-show="selectedHospitalCost">{{selectedPayment.payHospital | currency:"$"}}</b>                                <b ng-hide="selectedHospitalCost">{{minPayment.payHospital | currency:"$"}} - {{maxPayment.payHospital | currency:"$"}}</b></td>
 	                        </tr>
 
 	</table>
@@ -316,13 +316,13 @@
 	                                                        <td>                                <b>Total Charges*</b></td>                            <td>                                <b ng-show="selectedDocCost">{{selectedDocCost | currency:"$"}}</b><b ng-hide="selectedDocCost">{{docMin | currency:"$"}} - {{docMax | currency:"$"}}</b></td>
 	                        </tr>
 	                                                <tr>
-	                                                        <td>                                <b>Total Adjustments</b></td>                            <td>                                <b>5,000 - 7,500</b></td>
+	                                                        <td>                                <b>Total Adjustments</b></td>                            <td>                                <b>N/A</b></td>
 	                        </tr>
 	                                                <tr>
-	                                                        <td>                                <b>Total Insurance Payment</b></td>                            <td>                                <b>{{specifiedInsuranceBenfits.deductable}}</b></td>
+	                                                        <td>                                <b>Total Insurance Payment</b></td>                            <td>                                <b ng-show="selectedDocCost">{{selectedPayment.insuranceCoverage[0] | currency:"$"}}</b>                                <b ng-hide="selectedDocCost">{{minPayment.insuranceCoverage[0] | currency:"$"}} - {{maxPayment.insuranceCoverage[0] | currency:"$"}}</b></td>
 	                        </tr>
 	                                                <tr>
-	                                                        <td>                                <b>Total Patient Payment</b></td>                            <td>                                <b>5,000 - 7,500</b></td>
+	                                                        <td>                                <b>Total Patient Payment</b></td>                            <td>                                <b><b ng-show="selectedDocCost">{{selectedPayment.payDoc | currency:"$"}}</b>                                <b ng-hide="selectedDocCost">{{minPayment.payDoc | currency:"$"}} - {{maxPayment.payDoc | currency:"$"}}</b></b></td>
 	                        </tr>
 
 	</table>

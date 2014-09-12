@@ -343,6 +343,7 @@ $scope.selectDoctor = function(doctorIndexNumber) {
 	console.log($scope.selectedProcedure);
 	//Need to display in the view
 	$scope.choosenDoctor = choosenDoctor;
+	$scope.insuranceMoneyUpdate();
 }
 
 $scope.doctorMap = function(doctorNumber) {
@@ -379,6 +380,7 @@ $scope.selectHospital = function(hospitalIndexNumber) {
 	console.log($scope.selectedProcedure);
 	//Need to display in the view
 	$scope.choosenHospital = choosenHospital;
+	$scope.insuranceMoneyUpdate();
 }
 
 $scope.hospitalMap = function(hospitalNumber) {
@@ -648,17 +650,17 @@ $scope.specifiedInsuranceBenefits = {
 
 $scope.calculateInsurance = function(insuranceValues) {
 	if($scope.checkedInsuranceItems[0]) {
-		$scope.specifiedInsuranceBenefits.deductable = insuranceValues[0];
+		$scope.specifiedInsuranceBenefits.deductable = (insuranceValues[0] / 1);
 	}
 
 	if($scope.checkedInsuranceItems[1]) {
 		$scope.specifiedInsuranceBenefits.postDeductableLiability = (insuranceValues[1] / 100);
 	}
 	if($scope.checkedInsuranceItems[2]) {
-		$scope.specifiedInsuranceBenefits.copay = insuranceValues[2];
+		$scope.specifiedInsuranceBenefits.copay = (insuranceValues[2] / 1);
 	}
 	if($scope.checkedInsuranceItems[3]) {
-		$scope.specifiedInsuranceBenefits.MaxOutOfPocket = insuranceValues[4];
+		$scope.specifiedInsuranceBenefits.MaxOutOfPocket = (insuranceValues[3] / 1);
 	}
 	console.log($scope.specifiedInsuranceBenefits.deductable);
 	$scope.insuranceMoneyUpdate();
@@ -686,7 +688,11 @@ $scope.insuranceMoneyUpdate = function() {
 $scope.paymentCalculator = function(docCharges, hospitalCharges, insuranceBenefits) {
 	var deductable = insuranceBenefits.deductable;
 	var outOfPocketLimit = insuranceBenefits.MaxOutOfPocket;
-	var retVal = {payDoc: 0, payHospital: 0, insuranceCoverage: 0};
+	var copay = insuranceBenefits.copay;
+	var doctorOverLimitPay = 0;
+	var hospitalOverLimitPay = 0;
+	outOfPocketLimit += 0; //I'm guessing this makes outOfPocketLimit into a number ???
+	var retVal = {payDoc: 0, payHospital: 0, insuranceCoverage: [0,0]};
 	if(docCharges <= deductable ) {
 		retVal.payDoc = docCharges;
 		deductable -= docCharges;
@@ -694,12 +700,15 @@ $scope.paymentCalculator = function(docCharges, hospitalCharges, insuranceBenefi
 	else {
 		//add deductable to payout, add non-coinsurance above deducatble, add rest to coinsurance le
 		retVal.payDoc += deductable;
-		retVal.payDoc += ( (docCharges - deductable) * insuranceBenefits.postDeducableLiability);
-		retVal.insuranceCoverage = ( (docCharges - deductable) *  (1 - insuranceBenefits.postDeducableLiability) );
+		retVal.payDoc += ( (docCharges - deductable) * insuranceBenefits.postDeductableLiability);
+		retVal.insuranceCoverage[0] = ( (docCharges - deductable) *  (1 - insuranceBenefits.postDeductableLiability) );
 		deductable = 0; // zerp deductable
-		retVal.payDoc += insuranceBenefits.copay;
+	//	retVal.payDoc += insuranceBenefits.copay;
+	retVal.payDoc += copay;
 		if(retVal.payDoc >= outOfPocketLimit) {
-			retVal.payDoc = outOfPocketLimit;
+			doctorOverLimitPay = (retVal.payDoc - outOfPocketLimit);
+			retVal.payDoc = outOfPocketLimit + 0;
+			retVal.insuranceCoverage[0] += doctorOverLimitPay;
 			outOfPocketLimit = 0;
 		}
 		else {
@@ -714,12 +723,14 @@ $scope.paymentCalculator = function(docCharges, hospitalCharges, insuranceBenefi
 	else {
 		//add deductable to payout, add non-coinsurance above deducatble, add rest to coinsurance le
 		retVal.payHospital += deductable;
-		retVal.payHospital += ( (hospitalCharges - deductable) * insuranceBenefits.postDeducableLiability);
-		retVal.insuranceCoverage = ( (hospitalCharges - deductable) *  (1 - insuranceBenefits.postDeducableLiability) );
+		retVal.payHospital += ( (hospitalCharges - deductable) * insuranceBenefits.postDeductableLiability);
+		retVal.insuranceCoverage[1] = ( (hospitalCharges - deductable) *  (1 - insuranceBenefits.postDeductableLiability) );
 		deductable = 0; // zerp deductable
-		retVal.payHospital += insuranceBenefits.copay;
+	//	retVal.payHospital += insuranceBenefits.copay;
 		if(retVal.payHospital >= outOfPocketLimit) {
-			retVal.payHospital = outOfPocketLimit;
+			hospitalOverLimitPay = (retVal.payHospital - outOfPocketLimit);
+			retVal.payHospital = outOfPocketLimit + 0;
+			retVal.insuranceCoverage[1] += hospitalOverLimitPay;
 			outOfPocketLimit = 0;
 		}
 		else {
