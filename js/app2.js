@@ -249,7 +249,7 @@ process_r = {
     },
     {id: 4, description: "Spinal Fusion",
       questions: [
-        { prompt: "Is your procedure on your neck (cervical), mid-back (thoracic), or lower back (lumbar)?", responses: ["Yes", "No"] },
+        { prompt: "Is your procedure on your back? (meaning mid-back or lower back. as opposed to your neck)", responses: ["Yes", "No"] },
         { prompt: "Do you have scoliosis or do you plan on having 9+ vertebra fused?", responses: ["Yes", "No"] },
         { prompt: "Do you have any of the following conditions: Alzheimer's Disease, BMI less than 19 or over 40, Chronic Congestive Heart Failure, Colitis, Crohn's Disease, Diverticulitis, Kidney Disease, Severe Depression)?", responses: ["Yes", "No"] },
         { prompt: "Are you having fusion surgery done from both the front approach (anterior) and back approach (posterior)?", responses: ["Yes", "No"] }
@@ -274,11 +274,11 @@ process_r = {
 var ans_cost_r = {
 	procedures: [{ID:59400767,PrimaryDesc:"Delivering a Baby",DrgDesc:"VAGINAL DELIVERY W STERILIZATION &/OR D&C",IN_OUT:"Inpatient",Answer1:null,Answer2:null,Answer3:null,Answer4:null,Answer5:null,MedicareBaseRate:5312.461956,MedicareBaseRate:2050.03,MedicareBaseRate:null,Rex:25017.8143,WakeMed:28972.3399,drFeelgood:1025.015,Rex:5549.043447,WakeMed:6426.171804,drSchmidt:2050.03},
 {ID:59400768,PrimaryDesc:"Delivering a Baby",DrgDesc:"VAGINAL DELIVERY W O.R. PROC EXCEPT STERIL &/OR D&C",IN_OUT:"Inpatient",Answer1:null,Answer2:null,Answer3:null,Answer4:null,Answer5:null,MedicareBaseRate:10498.99804,MedicareBaseRate:2050.03,MedicareBaseRate:null,Rex:49442.60974,WakeMed:57257.9234,drFeelgood:1025.015,Rex:10966.55312,WakeMed:12700.0185,drSchmidt:2050.03},
-{ID:59400774,PrimaryDesc:"Delivering a Baby",DrgDesc:"VAGINAL DELIVERY W COMPLICATING DIAGNOSES",IN_OUT:"Inpatient",Answer1:1,Answer2:0,Answer3:1,Answer4:0,Answer5:2,MedicareBaseRate:4145.77884,MedicareBaseRate:2050.03,MedicareBaseRate:null,Rex:19523.58926,WakeMed:22609.65155,drFeelgood:1025.015,Rex:4330.404075,WakeMed:5014.90407,drSchmidt:2050.03},
-{ID:59400775,PrimaryDesc:"Delivering a Baby",DrgDesc:"VAGINAL DELIVERY W/O COMPLICATING DIAGNOSES",IN_OUT:"Inpatient",Answer1:1,Answer2:1,Answer3:1,Answer4:1,Answer5:4,MedicareBaseRate:3301.672968,MedicareBaseRate:2050.03,MedicareBaseRate:null,Rex:15548.46734,WakeMed:18006.18852,drFeelgood:1025.015,Rex:3448.707379,WakeMed:3993.838997,drSchmidt:2050.03},
-{ID:59510765,PrimaryDesc:"Delivering a Baby",DrgDesc:"CESAREAN SECTION W CC/MCC",IN_OUT:"Inpatient",Answer1:0,Answer2:1,Answer3:0,Answer4:1,Answer5:2,MedicareBaseRate:6914.998104,MedicareBaseRate:2265.49,MedicareBaseRate:null,Rex:32564.58868,WakeMed:37712.02075,drFeelgood:1132.745,Rex:7222.945827,WakeMed:8364.665236,drSchmidt:2265.49},
-{ID:59510766,PrimaryDesc:"Delivering a Baby",DrgDesc:"CESAREAN SECTION W/O CC/MCC",IN_OUT:"Inpatient",Answer1:0,Answer2:0,Answer3:0,Answer4:0,Answer5:0,MedicareBaseRate:4932.959316,MedicareBaseRate:2265.49,MedicareBaseRate:null,Rex:23230.63415,WakeMed:26902.66306,drFeelgood:1132.745,Rex:5152.6403,WakeMed:5967.10985,drSchmidt:2265.49},
-{ID:47562417,PrimaryDesc:"Laparoscopic cholecystectomy",DrgDesc:"LAPAROSCOPIC CHOLECYSTECTOMY W/O C.D.E. W MCC",IN_OUT:"Inpatient",Answer1:1,Answer2:0,Answer3:1,Answer4:0,Answer5:2,MedicareBaseRate:14514.25097,MedicareBaseRate:633.73,MedicareBaseRate:null,Rex:68351.51734,WakeMed:79155.73155,drFeelgood:316.865,Rex:15160.61854,WakeMed:17557.03309,drSchmidt:633.73},
+{ID:59400774,PrimaryDesc:"Delivering a Baby",DrgDesc:"VAGINAL DELIVERY W COMPLICATING DIAGNOSES",IN_OUT:"Inpatient",Answer1:1,Answer2:0,Answer3:-1,Answer4:-1,Answer5:-1,MedicareBaseRate:4145.77884,MedicareBaseRate:2050.03,MedicareBaseRate:null,Rex:19523.58926,WakeMed:22609.65155,drFeelgood:1025.015,Rex:4330.404075,WakeMed:5014.90407,drSchmidt:2050.03},
+{ID:59400775,PrimaryDesc:"Delivering a Baby",DrgDesc:"VAGINAL DELIVERY W/O COMPLICATING DIAGNOSES",IN_OUT:"Inpatient",Answer1:1,Answer2:1,Answer3:-1,Answer4:-1,Answer5:-1,MedicareBaseRate:3301.672968,MedicareBaseRate:2050.03,MedicareBaseRate:null,Rex:15548.46734,WakeMed:18006.18852,drFeelgood:1025.015,Rex:3448.707379,WakeMed:3993.838997,drSchmidt:2050.03},
+{ID:59510765,PrimaryDesc:"Delivering a Baby",DrgDesc:"CESAREAN SECTION W CC/MCC",IN_OUT:"Inpatient",Answer1:0,Answer2:0,Answer3:-1,Answer4:-1,Answer5:-1,MedicareBaseRate:6914.998104,MedicareBaseRate:2265.49,MedicareBaseRate:null,Rex:32564.58868,WakeMed:37712.02075,drFeelgood:1132.745,Rex:7222.945827,WakeMed:8364.665236,drSchmidt:2265.49},
+{ID:59510766,PrimaryDesc:"Delivering a Baby",DrgDesc:"CESAREAN SECTION W/O CC/MCC",IN_OUT:"Inpatient",Answer1:0,Answer2:1,Answer3:-1,Answer4:-1,Answer5:-1,MedicareBaseRate:4932.959316,MedicareBaseRate:2265.49,MedicareBaseRate:null,Rex:23230.63415,WakeMed:26902.66306,drFeelgood:1132.745,Rex:5152.6403,WakeMed:5967.10985,drSchmidt:2265.49},
+{ID:47562417,PrimaryDesc:"Laparoscopic cholecystectomy",DrgDesc:"LAPAROSCOPIC CHOLECYSTECTOMY W/O C.D.E. W MCC",IN_OUT:"Inpatient",Answer1:0,Answer2:0,Answer3:-1,Answer4:-1,Answer5:-1,MedicareBaseRate:14514.25097,MedicareBaseRate:633.73,MedicareBaseRate:null,Rex:68351.51734,WakeMed:79155.73155,drFeelgood:316.865,Rex:15160.61854,WakeMed:17557.03309,drSchmidt:633.73},
 {ID:47562418,PrimaryDesc:"Laparoscopic cholecystectomy",DrgDesc:"LAPAROSCOPIC CHOLECYSTECTOMY W/O C.D.E. W CC",IN_OUT:"Inpatient",Answer1:1,Answer2:1,Answer3:1,Answer4:1,Answer5:4,MedicareBaseRate:9806.118216,MedicareBaseRate:633.73,MedicareBaseRate:null,Rex:37369.02857,WakeMed:52263.183,drFeelgood:316.865,Rex:9337.4,WakeMed:11592.16667,drSchmidt:633.73},
 {ID:47562419,PrimaryDesc:"Laparoscopic cholecystectomy",DrgDesc:"LAPAROSCOPIC CHOLECYSTECTOMY W/O C.D.E. W/O CC/MCC",IN_OUT:"Inpatient",Answer1:0,Answer2:1,Answer3:0,Answer4:1,Answer5:2,MedicareBaseRate:6927.073188,MedicareBaseRate:633.73,MedicareBaseRate:null,Rex:32621.4535,WakeMed:37777.8741,drFeelgood:316.865,Rex:7235.558654,WakeMed:8379.271752,drSchmidt:633.73},
 {ID:22612453,PrimaryDesc:"Spinal Fusion",DrgDesc:"COMBINED ANTERIOR/POSTERIOR SPINAL FUSION W MCC",IN_OUT:"Inpatient",Answer1:0,Answer2:0,Answer3:0,Answer4:0,Answer5:0,MedicareBaseRate:60535.84612,MedicareBaseRate:1537.99,MedicareBaseRate:null,Rex:285079.6052,WakeMed:330141.679,drFeelgood:768.995,Rex:63231.70744,WakeMed:73226.64156,drSchmidt:1537.99},
@@ -642,24 +642,26 @@ $scope.checkedInsuranceItems = [true, true, true, true, true];
 $scope.insuranceValues = [];
 $scope.specifiedInsuranceBenefits = {
 	deductable: 0,
-	postDeductableLiability: 0.0,
+	postDeductableLiability: 1,
+	postDeductableCoverage: 0,
 	copay: 0,
 	MaxOutOfPocket: 1000000
 	//Didn't know what infinity was in javascript
 };
 
 $scope.calculateInsurance = function(insuranceValues) {
-	if($scope.checkedInsuranceItems[0]) {
+	if($scope.checkedInsuranceItems[0] && insuranceValues[0]) {
 		$scope.specifiedInsuranceBenefits.deductable = (insuranceValues[0] / 1);
 	}
 
-	if($scope.checkedInsuranceItems[1]) {
+	if($scope.checkedInsuranceItems[1] && insuranceValues[1]) {
 		$scope.specifiedInsuranceBenefits.postDeductableLiability = (insuranceValues[1] / 100);
+		$scope.specifiedInsuranceBenefits.postDeductableCoverage = (1 - (insuranceValues[1] / 100) );
 	}
-	if($scope.checkedInsuranceItems[2]) {
+	if($scope.checkedInsuranceItems[2] && insuranceValues[2]) {
 		$scope.specifiedInsuranceBenefits.copay = (insuranceValues[2] / 1);
 	}
-	if($scope.checkedInsuranceItems[3]) {
+	if($scope.checkedInsuranceItems[3] && insuranceValues[3]) {
 		$scope.specifiedInsuranceBenefits.MaxOutOfPocket = (insuranceValues[3] / 1);
 	}
 	console.log($scope.specifiedInsuranceBenefits.deductable);
@@ -701,7 +703,7 @@ $scope.paymentCalculator = function(docCharges, hospitalCharges, insuranceBenefi
 		//add deductable to payout, add non-coinsurance above deducatble, add rest to coinsurance le
 		retVal.payDoc += deductable;
 		retVal.payDoc += ( (docCharges - deductable) * insuranceBenefits.postDeductableLiability);
-		retVal.insuranceCoverage[0] = ( (docCharges - deductable) *  (1 - insuranceBenefits.postDeductableLiability) );
+		retVal.insuranceCoverage[0] = ( (docCharges - deductable) *  insuranceBenefits.postDeductableCoverage );
 		deductable = 0; // zerp deductable
 	//	retVal.payDoc += insuranceBenefits.copay;
 	retVal.payDoc += copay;
@@ -724,7 +726,7 @@ $scope.paymentCalculator = function(docCharges, hospitalCharges, insuranceBenefi
 		//add deductable to payout, add non-coinsurance above deducatble, add rest to coinsurance le
 		retVal.payHospital += deductable;
 		retVal.payHospital += ( (hospitalCharges - deductable) * insuranceBenefits.postDeductableLiability);
-		retVal.insuranceCoverage[1] = ( (hospitalCharges - deductable) *  (1 - insuranceBenefits.postDeductableLiability) );
+		retVal.insuranceCoverage[1] = ( (hospitalCharges - deductable) *  insuranceBenefits.postDeductableCoverage );
 		deductable = 0; // zerp deductable
 	//	retVal.payHospital += insuranceBenefits.copay;
 		if(retVal.payHospital >= outOfPocketLimit) {
@@ -800,15 +802,41 @@ var SecondModalInstanceCtrl = function ($scope, $modalInstance, checkedInsurance
   };
 };
 
+
+
 //TODO: fix the ansersArray to check all the answers
 var getProcedureID = function (descriptionString, answersArray) {
+	var checkForAnswer = function(index, array) {
+		if(array.length <= index) {
+			var checkIndex = index - 1;
+			console.log(array[checkIndex].answer);
+			return array[checkIndex].answer;
+		}
+		else return null;
+	}	
+	answerCopy = [{answer: -1, question: "null"}, {answer: -1, question: "null"}, {answer: -1, question: "null"}, {answer: -1, question: "null"}, {answer: -1, question: "null"}];
+	for(var i = 0; i < answersArray.length; i++) {
+		answerCopy[i] = answersArray[i];
+	}
+	
 	var resultsArray = _(_.get(ans_cost_r)).chain().where(
 		{PrimaryDesc:descriptionFix(descriptionString),
-			 Answer1: answersArray[0].answer, Answer2: answersArray[0].answer, Answer3: answersArray[0].answer, Answer4: answersArray[0].answer}).pluck("ID").value();
+			 Answer1: answerCopy[0].answer, Answer2: answerCopy[1].answer, Answer3: answerCopy[2].answer, Answer4: answerCopy[3].answer, Answer5: answerCopy[4].answer}).pluck("ID").value();
+
+ 	// var resultsArray = _(_.get(ans_cost_r)).chain().where(
+ 	// 	{PrimaryDesc:descriptionFix(descriptionString),
+ 	// 		 Answer1: checkForAnswer(1, answersArray), Answer2: checkForAnswer(2, answersArray)(), Answer3: checkForAnswer(3, answersArray), Answer4: checkForAnswer(4, answersArray), Answer5: checkForAnswer(5, answersArray)}).pluck("ID").value();
 	
 	//Should only have one element anyway
 	return _.first(resultsArray);
 };
+
+var checkForAnswer = function(index, array) {
+	if(array.length <= index) {
+		return array[index - 1];
+	}
+	else return null;
+}
 
 var getProcedureObjectById = function(procedureCode) {
 	resultArray =  _(ans_cost_r.procedures).where({ID:procedureCode});
